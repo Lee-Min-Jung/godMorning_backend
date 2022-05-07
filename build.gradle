@@ -1,0 +1,43 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group 'com.godMorning_backend'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    implementation('org.projectlombok:lombok')
+    implementation 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor('org.projectlombok:lombok')
+    testImplementation('org.projectlombok:lombok')
+    testAnnotationProcessor('org.projectlombok:lombok')
+    implementation('org.springframework.boot:spring-boot-devtools')
+
+    implementation('org.apache.httpcomponents:httpclient:4.5.13')
+    implementation 'org.projectlombok:lombok:1.18.20'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+
+    //DB
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'mysql:mysql-connector-java:8.0.21'
+
+    // 배포를 위한 의존성 추가
+    implementation 'org.springframework.boot:spring-boot-starter-tomcat'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
