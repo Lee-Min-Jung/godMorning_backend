@@ -1,10 +1,7 @@
 package com.godMorning_backend.controller;
 
-import com.godMorning_backend.domain.Routine;
 import com.godMorning_backend.domain.Test;
-import com.godMorning_backend.repository.JDBCRoutineRepository;
 import com.godMorning_backend.repository.JDBCTestRepository;
-import com.godMorning_backend.service.RoutineServiceImpl;
 import com.godMorning_backend.service.TestServiceImpl;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ui.Model;
