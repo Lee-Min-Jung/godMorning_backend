@@ -16,6 +16,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation('org.apache.httpcomponents:httpclient:4.5.13')
 
     implementation('org.projectlombok:lombok')
     implementation 'org.projectlombok:lombok:1.18.20'
@@ -32,6 +33,10 @@ dependencies {
     //DB
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'mysql:mysql-connector-java:8.0.21'
+    //spring security
+    implementation('org.springframework.boot:spring-boot-starter-oauth2-client')
+    implementation('org.springframework.session:spring-session-jdbc')
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 
     // 배포를 위한 의존성 추가
     implementation 'org.springframework.boot:spring-boot-starter-tomcat'
