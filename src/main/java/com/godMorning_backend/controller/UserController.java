@@ -14,13 +14,24 @@ public class UserController {
 
     private final HttpSession httpSession;
 
-    @GetMapping("/")
+//    @GetMapping("/")
+//    public SessionUser index(Model model){
+//        SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
+//
+//
+//        if(user != null) {
+//            model.addAttribute("name", user.getName());
+//        }
+//        return user;
+//    }
+
+    @GetMapping("/login/oauth2/code/google")
     public SessionUser index(Model model){
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
 
 
         if(user != null) {
-            model.addAttribute("userName", user.getName());
+            model.addAttribute("name", user.getName());
         }
         return user;
     }

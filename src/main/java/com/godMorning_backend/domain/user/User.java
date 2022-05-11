@@ -10,17 +10,19 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name="user")
+@Table(name="googleUser")
 public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String email;
 
     @Column(nullable = false)
-    private String email;
+    private String name;
+
+
 
     @Column
     private String picture;
