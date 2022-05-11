@@ -14,18 +14,18 @@ public class UserController {
 
     private final HttpSession httpSession;
 
-//    @GetMapping("/")
-//    public SessionUser index(Model model){
-//        SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
-//
-//
-//        if(user != null) {
-//            model.addAttribute("name", user.getName());
-//        }
-//        return user;
-//    }
+    @GetMapping("/bye")
+    public SessionUser bye(Model model){
+        SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
 
-    @GetMapping("/login/oauth2/code/google")
+
+        if(user != null) {
+            model.addAttribute("name", user.getName());
+        }
+        return user;
+    }
+
+    @GetMapping("/home")
     public SessionUser index(Model model){
         SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
 
@@ -35,4 +35,15 @@ public class UserController {
         }
         return user;
     }
+//
+//    @GetMapping("/login/oauth2/code/google")
+//    public SessionUser index(Model model){
+//        SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
+//
+//
+//        if(user != null) {
+//            model.addAttribute("name", user.getName());
+//        }
+//        return user;
+//    }
 }
