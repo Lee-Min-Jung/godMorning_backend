@@ -14,6 +14,7 @@ public class UserController {
 
     private final HttpSession httpSession;
 
+    //일단 급해서 bye라고 해 놓긴 했는데.. 수정필요
     @GetMapping("/bye")
     public SessionUser bye(Model model){
         SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
@@ -35,15 +36,5 @@ public class UserController {
         }
         return user;
     }
-//
-//    @GetMapping("/login/oauth2/code/google")
-//    public SessionUser index(Model model){
-//        SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
-//
-//
-//        if(user != null) {
-//            model.addAttribute("name", user.getName());
-//        }
-//        return user;
-//    }
+
 }

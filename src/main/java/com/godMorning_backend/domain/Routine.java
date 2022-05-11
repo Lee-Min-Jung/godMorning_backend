@@ -1,23 +1,20 @@
 package com.godMorning_backend.domain;
 
+import com.nimbusds.oauth2.sdk.util.date.SimpleDate;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.text.SimpleDateFormat;
 
 @Getter
 @Setter
 public class Routine {
-    private String userId;
+
+
+    private Long id;
     private String title;
     private String timezone;
-    private String toDo1;
-    private String toDo2;
-    private String toDo3;
-    private String toDo4;
-    private String toDo5;
-    private String toDo6;
-    private String toDo7;
-    private String toDo8;
-    private String toDo9;
-    private String toDo10;
+    private String create_time;
+
 
 }
