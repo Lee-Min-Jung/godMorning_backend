@@ -1,6 +1,7 @@
 package com.godMorning_backend.repository;
 
 import com.godMorning_backend.domain.Routine;
+import com.godMorning_backend.domain.ToDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -24,6 +25,8 @@ public class JDBCRoutineRepository implements RoutineRepository{
         String sql = "INSERT INTO Routine(id, title, timezone, create_time) VALUES (?,?,?,?)";
         Object[] Params = {routine.getId(), routine.getTitle(), routine.getTimezone(), routine.getCreate_time()};
         jdbcTemplate.update(sql,Params);
+
+
     }
 
 
@@ -38,4 +41,6 @@ public class JDBCRoutineRepository implements RoutineRepository{
             return routine;
         };
     }
+
+
 }
