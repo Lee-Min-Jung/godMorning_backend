@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,7 +16,7 @@ public class Routine {
     private String title;
     private String timezone;
     private String create_time;
-
+    List<ToDo> todo_list;
 
 
 

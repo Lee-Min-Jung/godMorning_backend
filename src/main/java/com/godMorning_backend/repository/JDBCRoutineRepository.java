@@ -26,6 +26,14 @@ public class JDBCRoutineRepository implements RoutineRepository{
         Object[] Params = {routine.getId(), routine.getTitle(), routine.getTimezone(), routine.getCreate_time()};
         jdbcTemplate.update(sql,Params);
 
+        int len = routine.getTodo_list().size();
+        for(int i=0;i<len;i++){
+            String sql2 = "INSERT INTO ToDo(post_no, content, check_do) VALUES (?,?,?)";
+            Object[] Params2 = {routine.getTodo_list().get(i).getPost_no(), routine.getTodo_list().get(i).getContent(), routine.getTodo_list().get(i).getCheck_do() };
+            jdbcTemplate.update(sql2, Params2);
+        }
+
+
 
     }
 
@@ -39,6 +47,16 @@ public class JDBCRoutineRepository implements RoutineRepository{
             routine.setTimezone((rs.getString("timezone")));
             routine.setCreate_time((rs.getString("create_time")));
             return routine;
+        };
+    }
+
+    private RowMapper<ToDo> ToDoRowMapper() {
+        return (rs, rowNum) -> {
+            ToDo todo = new ToDo();
+            todo.setPost_no((rs.getInt("post_no")));
+            todo.setContent((rs.getString("content")));
+            todo.setCheck_do((rs.getInt("check_do")));
+            return todo;
         };
     }
 

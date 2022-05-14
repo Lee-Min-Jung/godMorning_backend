@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class RoutineController {
@@ -57,7 +59,7 @@ public class RoutineController {
     }
 
     @PostMapping(value = "routine/create",   produces = "application/json; charset=UTF-8")
-    public Routine save(@RequestBody Routine routine, Model model) {
+    public Routine save(@RequestBody Routine routine) {
         SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
 
         //루틴
@@ -77,10 +79,41 @@ public class RoutineController {
         routine.setCreate_time(create_time);
 
 
+        //투두
+        int len = routine.getTodo_list().size();
+        ToDo setToDo = new ToDo();
+        List<ToDo> set_todo_list = new ArrayList<>();
+
+        int post_no = 0;
+        String content = "";
+        //int check_do = 0;
+
+        for(int i=0;i<len;i++){
+            post_no = routine.getTodo_list().get(i).getPost_no();
+            content = routine.getTodo_list().get(i).getContent();
+            //check_do = routine.getTodo_list().get(i).getCheck_do();
+
+            setToDo.setPost_no(post_no);
+            setToDo.setContent(content);
+            setToDo.setCheck_do(0);
+
+            set_todo_list.add(setToDo);
+
+        }
+
+        routine.setTodo_list(set_todo_list);
+
+
 
 
 
         routineServiceImpl.saveRoutine(routine);
+
+
+
+
+
+
 
 
 
