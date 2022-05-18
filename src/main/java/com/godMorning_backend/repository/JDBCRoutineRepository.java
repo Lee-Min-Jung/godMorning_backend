@@ -19,11 +19,22 @@ public class JDBCRoutineRepository implements RoutineRepository{
         jdbcTemplate = new JdbcTemplate(dataSource);
 
     }
+    @Override
+    public Routine findByIdDate(Long id, String create_date){
+        String sql = "select * from Routine where id = ? and create_date = ? ";
+        List<Routine> result = jdbcTemplate.query(sql, RoutineRowMapper(), id, create_date);
+
+
+        String sql2 = "select * from ToDo where post_no = 2";
+        List<ToDo> result2 = jdbcTemplate.query(sql2, ToDoRowMapper());
+        result.get(0).setTodo_list(result2);
+        return result.get(0);
+    }
 
     @Override
     public void saveRoutine(Routine routine) {
-        String sql = "INSERT INTO Routine(id, title, timezone, create_time) VALUES (?,?,?,?)";
-        Object[] Params = {routine.getId(), routine.getTitle(), routine.getTimezone(), routine.getCreate_time()};
+        String sql = "INSERT INTO Routine(id, title, timezone, create_date) VALUES (?,?,?,?)";
+        Object[] Params = {routine.getId(), routine.getTitle(), routine.getTimezone(), routine.getCreate_date()};
         jdbcTemplate.update(sql,Params);
 
         int len = routine.getTodo_list().size();
@@ -45,7 +56,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
             routine.setId((rs.getLong("id")));
             routine.setTitle((rs.getString("title")));
             routine.setTimezone((rs.getString("timezone")));
-            routine.setCreate_time((rs.getString("create_time")));
+            routine.setCreate_date((rs.getString("create_date")));
             return routine;
         };
     }

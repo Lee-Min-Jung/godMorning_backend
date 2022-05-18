@@ -12,7 +12,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +62,17 @@ public class RoutineController {
         return todo;
     }
 
+    @RequestMapping(value = "todo/list")
+    public Routine findByIdDate(HttpServletRequest request, Model model){
+        Long id = Long.parseLong(request.getParameter("id"));
+        String create_date = request.getParameter("create_date");
+        model.addAttribute("id",id);
+        model.addAttribute("create_date",create_date);
+
+
+        return routineServiceImpl.findByIdDate(id, create_date);
+
+    }
     @PostMapping(value = "routine/create",   produces = "application/json; charset=UTF-8")
     public Routine save(@RequestBody Routine routine) {
         SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
@@ -66,17 +81,17 @@ public class RoutineController {
         Long id = 0L;
         String title = "";
         String timezone = "";
-        String create_time = "";
+        String create_date = "";
 
-        id = 1L;
+        id = routine.getId();
         title = routine.getTitle();
         timezone = routine.getTimezone();
-        create_time = routine.getCreate_time();
+        create_date = routine.getCreate_date();
 
         routine.setId(id);
         routine.setTitle(title);
         routine.setTimezone(timezone);
-        routine.setCreate_time(create_time);
+        routine.setCreate_date(create_date);
 
 
         //투두

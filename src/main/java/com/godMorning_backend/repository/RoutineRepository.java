@@ -10,7 +10,8 @@ public interface RoutineRepository {
     // 문제 저장
     void saveRoutine(Routine routine);
 
-    // 회원아이디로 조회
+    // 회원아이디와 날짜로 조회
+    Routine findByIdDate(Long id, String create_date);
 
 
 

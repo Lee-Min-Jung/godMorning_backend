@@ -13,5 +13,5 @@ public class ToDo {
     private String content;
     private int check_do;
 
-    List<ToDo> todo_list;
+
 }

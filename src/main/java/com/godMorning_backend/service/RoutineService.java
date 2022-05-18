@@ -8,5 +8,5 @@ import java.util.List;
 public interface RoutineService {
     int saveRoutine(Routine routine);
 
-    List<Routine> findById(String userId);
+    Routine findByIdDate(Long id, String create_date);
 }

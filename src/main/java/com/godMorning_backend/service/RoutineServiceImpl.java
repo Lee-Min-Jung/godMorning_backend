@@ -16,7 +16,11 @@ public class RoutineServiceImpl implements RoutineService{
     public RoutineServiceImpl(JDBCRoutineRepository jdbcRoutineRepository) {
         this.jdbcRoutineRepository = jdbcRoutineRepository;
     }
+    @Override
+    public Routine findByIdDate(Long id, String create_date){
+        return jdbcRoutineRepository.findByIdDate(id, create_date);
 
+    }
     @Override
     public int saveRoutine(Routine routine) {
         jdbcRoutineRepository.saveRoutine(routine);
@@ -24,8 +28,5 @@ public class RoutineServiceImpl implements RoutineService{
         return 1;
     }
 
-    @Override
-    public List<Routine> findById(String userId) {
-        return null;
-    }
+
 }
