@@ -14,8 +14,9 @@ public class Routine {
 
     private Long id;
     private String title;
-    private String timezone;
     private String create_date;
+    private String startTime;
+    private String endTime;
     List<ToDo> todo_list;
 
 

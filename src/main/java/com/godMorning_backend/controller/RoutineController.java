@@ -80,18 +80,21 @@ public class RoutineController {
         //루틴
         Long id = 0L;
         String title = "";
-        String timezone = "";
         String create_date = "";
+        String startTime = "";
+        String endTime = "";
 
         id = routine.getId();
         title = routine.getTitle();
-        timezone = routine.getTimezone();
         create_date = routine.getCreate_date();
+        startTime = routine.getStartTime();
+        endTime = routine.getEndTime();
 
         routine.setId(id);
         routine.setTitle(title);
-        routine.setTimezone(timezone);
         routine.setCreate_date(create_date);
+        routine.setStartTime(startTime);
+        routine.setEndTime(endTime);
 
 
         //투두

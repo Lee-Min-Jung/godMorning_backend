@@ -33,8 +33,8 @@ public class JDBCRoutineRepository implements RoutineRepository{
 
     @Override
     public void saveRoutine(Routine routine) {
-        String sql = "INSERT INTO Routine(id, title, timezone, create_date) VALUES (?,?,?,?)";
-        Object[] Params = {routine.getId(), routine.getTitle(), routine.getTimezone(), routine.getCreate_date()};
+        String sql = "INSERT INTO Routine(id, title, create_date, startTime, endTime) VALUES (?,?,?,?,?)";
+        Object[] Params = {routine.getId(), routine.getTitle(), routine.getCreate_date(), routine.getStartTime(), routine.getEndTime()};
         jdbcTemplate.update(sql,Params);
 
         int len = routine.getTodo_list().size();
@@ -55,8 +55,9 @@ public class JDBCRoutineRepository implements RoutineRepository{
             Routine routine = new Routine();
             routine.setId((rs.getLong("id")));
             routine.setTitle((rs.getString("title")));
-            routine.setTimezone((rs.getString("timezone")));
             routine.setCreate_date((rs.getString("create_date")));
+            routine.setStartTime((rs.getString("startTime")));
+            routine.setEndTime((rs.getString("endTime")));
             return routine;
         };
     }
