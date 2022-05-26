@@ -16,11 +16,15 @@ public class RoutineServiceImpl implements RoutineService{
     public RoutineServiceImpl(JDBCRoutineRepository jdbcRoutineRepository) {
         this.jdbcRoutineRepository = jdbcRoutineRepository;
     }
+
+    //아이디랑 날짜로 루틴 찾기
     @Override
     public Routine findByIdDate(Long id, String create_date){
         return jdbcRoutineRepository.findByIdDate(id, create_date);
 
     }
+
+    //루틴 저장
     @Override
     public int saveRoutine(Routine routine) {
         jdbcRoutineRepository.saveRoutine(routine);
@@ -28,5 +32,9 @@ public class RoutineServiceImpl implements RoutineService{
         return 1;
     }
 
-
+    //루틴 삭제
+    @Override
+    public String deleteRoutine(int post_no) {
+        return jdbcRoutineRepository.deleteRoutine(post_no);
+    }
 }

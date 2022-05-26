@@ -6,7 +6,14 @@ import com.godMorning_backend.domain.ToDo;
 import java.util.List;
 
 public interface RoutineService {
+
+    //루틴 저장
     int saveRoutine(Routine routine);
 
+    //아이디랑 날짜로 루틴 찾기
     Routine findByIdDate(Long id, String create_date);
+
+    //루틴 삭제
+    String deleteRoutine(int post_no);
+
 }

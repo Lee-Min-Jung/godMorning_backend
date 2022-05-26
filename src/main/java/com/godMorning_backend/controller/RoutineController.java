@@ -38,30 +38,32 @@ public class RoutineController {
         this.httpSession = httpSession;
     }
 
-    @PostMapping(value = "todo/create", produces = "application/json; charset_UTF-8")
-    public ToDo save(@RequestBody ToDo todo){
-        SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
-        //투두
 
-        int post_no = 0;
-        String content = "";
-        int check_do = 0;
+//    @PostMapping(value = "todo/create", produces = "application/json; charset_UTF-8")
+//    public ToDo save(@RequestBody ToDo todo){
+//        SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
+//        //투두
+//
+//        int post_no = 0;
+//        String content = "";
+//        int check_do = 0;
+//
+//
+//        post_no = todo.getPost_no();
+//        content = todo.getContent();
+//        check_do = todo.getCheck_do();
+//
+//
+//        todo.setPost_no(post_no);
+//        todo.setContent(content);
+//        todo.setCheck_do(0);
+//
+//        toDoServiceImpl.saveToDo(todo);
+//
+//        return todo;
+//    }
 
-
-        post_no = todo.getPost_no();
-        content = todo.getContent();
-        check_do = todo.getCheck_do();
-
-
-        todo.setPost_no(post_no);
-        todo.setContent(content);
-        todo.setCheck_do(0);
-
-        toDoServiceImpl.saveToDo(todo);
-
-        return todo;
-    }
-
+    //아이디와 날짜로 루틴 조회
     @RequestMapping(value = "todo/list")
     public Routine findByIdDate(HttpServletRequest request, Model model){
         Long id = Long.parseLong(request.getParameter("id"));
@@ -73,6 +75,9 @@ public class RoutineController {
         return routineServiceImpl.findByIdDate(id, create_date);
 
     }
+
+    //루틴 저장
+    //create자리에 루틴 post_no가 오면 좋을 것 같음
     @PostMapping(value = "routine/create",   produces = "application/json; charset=UTF-8")
     public Routine save(@RequestBody Routine routine) {
         SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
@@ -118,26 +123,21 @@ public class RoutineController {
             set_todo_list.add(setToDo);
 
         }
-
         routine.setTodo_list(set_todo_list);
-
-
-
-
-
         routineServiceImpl.saveRoutine(routine);
-
-
-
-
-
-
-
-
-
-
-
 
         return routine;
     }
+
+    //루틴 삭제
+    @RequestMapping(value="routine/delete")
+    public String deleteRoutine(HttpServletRequest request, Model model){
+        int post_no = Integer.parseInt(request.getParameter("post_no"));
+        model.addAttribute("post_no",post_no);
+        return routineServiceImpl.deleteRoutine(post_no);
+
+    }
+
+
+
 }

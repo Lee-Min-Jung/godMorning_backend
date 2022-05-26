@@ -19,6 +19,8 @@ public class JDBCRoutineRepository implements RoutineRepository{
         jdbcTemplate = new JdbcTemplate(dataSource);
 
     }
+
+    //id랑 날짜로 루틴 찾기
     @Override
     public Routine findByIdDate(Long id, String create_date){
         String sql = "select * from Routine where id = ? and create_date = ? ";
@@ -31,6 +33,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
         return result.get(0);
     }
 
+    //루틴 저장
     @Override
     public void saveRoutine(Routine routine) {
         String sql = "INSERT INTO Routine(id, title, create_date, startTime, endTime) VALUES (?,?,?,?,?)";
@@ -48,7 +51,18 @@ public class JDBCRoutineRepository implements RoutineRepository{
 
     }
 
+    //루틴 삭제
 
+
+    @Override
+    public String deleteRoutine(int post_no) {
+        String sql1 = "delete from ToDo where post_no = ?";
+        String sql2 = "delete from Routine where post_no = ?";
+        jdbcTemplate.update(sql1, post_no);
+        jdbcTemplate.update(sql2, post_no);
+
+        return "루틴이 삭제되었습니다";
+    }
 
     private RowMapper<Routine> RoutineRowMapper() {
         return (rs, rowNum) -> {
