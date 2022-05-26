@@ -104,7 +104,7 @@ public class RoutineController {
 
         //투두
         int len = routine.getTodo_list().size();
-        ToDo setToDo = new ToDo();
+
         List<ToDo> set_todo_list = new ArrayList<>();
 
         int post_no = 0;
@@ -112,6 +112,7 @@ public class RoutineController {
         //int check_do = 0;
 
         for(int i=0;i<len;i++){
+            ToDo setToDo = new ToDo();
             post_no = routine.getTodo_list().get(i).getPost_no();
             content = routine.getTodo_list().get(i).getContent();
             //check_do = routine.getTodo_list().get(i).getCheck_do();

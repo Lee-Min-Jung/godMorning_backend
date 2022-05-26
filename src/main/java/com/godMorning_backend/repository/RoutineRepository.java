@@ -16,6 +16,7 @@ public interface RoutineRepository {
     // 루틴 삭제
     String deleteRoutine(int post_no);
 
-
+    //루틴 수정
+    void updateRoutine(Routine routine);
 
 }

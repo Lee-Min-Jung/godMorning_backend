@@ -51,9 +51,13 @@ public class JDBCRoutineRepository implements RoutineRepository{
 
     }
 
+    //루틴 수정
+    @Override
+    public void updateRoutine(Routine routine) {
+
+    }
+
     //루틴 삭제
-
-
     @Override
     public String deleteRoutine(int post_no) {
         String sql1 = "delete from ToDo where post_no = ?";
