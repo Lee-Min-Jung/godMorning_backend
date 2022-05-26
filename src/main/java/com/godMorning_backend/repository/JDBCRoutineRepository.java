@@ -27,8 +27,8 @@ public class JDBCRoutineRepository implements RoutineRepository{
         List<Routine> result = jdbcTemplate.query(sql, RoutineRowMapper(), id, create_date);
 
 
-        String sql2 = "select * from ToDo where post_no = 2";
-        List<ToDo> result2 = jdbcTemplate.query(sql2, ToDoRowMapper());
+        String sql2 = "select * from ToDo where post_no = (select post_no from Routine where id = ? and create_date = ?)";
+        List<ToDo> result2 = jdbcTemplate.query(sql2, ToDoRowMapper(), id, create_date);
         result.get(0).setTodo_list(result2);
         return result.get(0);
     }
