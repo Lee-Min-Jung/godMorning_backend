@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 public class ToDo {
 
-    private int post_no;
+    private Long post_no;
     private String content;
     private int check_do;
 

@@ -36,8 +36,8 @@ public class JDBCRoutineRepository implements RoutineRepository{
     //루틴 저장
     @Override
     public void saveRoutine(Routine routine) {
-        String sql = "INSERT INTO Routine(id, title, create_date, startTime, endTime) VALUES (?,?,?,?,?)";
-        Object[] Params = {routine.getId(), routine.getTitle(), routine.getCreate_date(), routine.getStartTime(), routine.getEndTime()};
+        String sql = "INSERT INTO Routine(post_no, id, title, create_date, startTime, endTime) VALUES (?,?,?,?,?,?)";
+        Object[] Params = {routine.getPost_no(), routine.getId(), routine.getTitle(), routine.getCreate_date(), routine.getStartTime(), routine.getEndTime()};
         jdbcTemplate.update(sql,Params);
 
         int len = routine.getTodo_list().size();
@@ -71,6 +71,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
     private RowMapper<Routine> RoutineRowMapper() {
         return (rs, rowNum) -> {
             Routine routine = new Routine();
+            routine.setPost_no((rs.getLong("post_no")));
             routine.setId((rs.getLong("id")));
             routine.setTitle((rs.getString("title")));
             routine.setCreate_date((rs.getString("create_date")));
@@ -79,11 +80,17 @@ public class JDBCRoutineRepository implements RoutineRepository{
             return routine;
         };
     }
-
+    public Long controller_getPostNo(){
+        try {
+            String sql = "SELECT max(post_no) FROM Routine;";
+            Long count = jdbcTemplate.queryForObject(sql, Long.class);
+            return count; }
+        catch (Exception e) { Long count = 1L ; return count;}
+    }
     private RowMapper<ToDo> ToDoRowMapper() {
         return (rs, rowNum) -> {
             ToDo todo = new ToDo();
-            todo.setPost_no((rs.getInt("post_no")));
+            todo.setPost_no((rs.getLong("post_no")));
             todo.setContent((rs.getString("content")));
             todo.setCheck_do((rs.getInt("check_do")));
             return todo;

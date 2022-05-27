@@ -83,6 +83,7 @@ public class RoutineController {
         SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
 
         //루틴
+        Long count = jdbcRoutineRepository.controller_getPostNo();
         Long id = 0L;
         String title = "";
         String create_date = "";
@@ -95,6 +96,7 @@ public class RoutineController {
         startTime = routine.getStartTime();
         endTime = routine.getEndTime();
 
+        routine.setPost_no(++count);
         routine.setId(id);
         routine.setTitle(title);
         routine.setCreate_date(create_date);
@@ -107,17 +109,17 @@ public class RoutineController {
 
         List<ToDo> set_todo_list = new ArrayList<>();
 
-        int post_no = 0;
+
         String content = "";
         //int check_do = 0;
 
         for(int i=0;i<len;i++){
             ToDo setToDo = new ToDo();
-            post_no = routine.getTodo_list().get(i).getPost_no();
+
             content = routine.getTodo_list().get(i).getContent();
             //check_do = routine.getTodo_list().get(i).getCheck_do();
 
-            setToDo.setPost_no(post_no);
+            setToDo.setPost_no(count);
             setToDo.setContent(content);
             setToDo.setCheck_do(0);
 

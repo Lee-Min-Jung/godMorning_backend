@@ -28,7 +28,7 @@ public class JDBCToDoRepository implements ToDoRepository{
     private RowMapper<ToDo> ToDoRowMapper() {
         return (rs, rowNum) -> {
             ToDo todo = new ToDo();
-            todo.setPost_no((rs.getInt("post_no")));
+            todo.setPost_no((rs.getLong("post_no")));
             todo.setContent((rs.getString("content")));
             todo.setCheck_do((rs.getInt("check_do")));
             return todo;
