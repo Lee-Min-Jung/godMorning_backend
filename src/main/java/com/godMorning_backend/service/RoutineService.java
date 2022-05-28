@@ -16,6 +16,15 @@ public interface RoutineService {
     //루틴 삭제
     String deleteRoutine(int post_no);
 
+    //신규 루틴 조회
+    List<Routine> newRoutineList();
+
+    //신규 루틴 상세 조회
+    Routine newRoutineDetail(Long post_no);
+
+    //시간대 루틴 조회
+    List<Routine> startTimeList(String startTime);
+
     //루틴 수정
 
 }

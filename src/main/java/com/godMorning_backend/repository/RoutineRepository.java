@@ -19,4 +19,13 @@ public interface RoutineRepository {
     //루틴 수정
     void updateRoutine(Routine routine);
 
+    //신규 루틴 조회
+    List<Routine>  newRoutineList();
+
+    //신규 루틴 상세 조회
+    Routine newRoutineDetail(Long post_no);
+
+    //시간대별 루틴 조회
+    List<Routine> startTimeList(String startTime);
+
 }

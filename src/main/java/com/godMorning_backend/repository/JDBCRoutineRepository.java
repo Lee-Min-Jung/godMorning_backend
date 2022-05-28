@@ -56,6 +56,38 @@ public class JDBCRoutineRepository implements RoutineRepository{
     public void updateRoutine(Routine routine) {
 
     }
+    //신규 루틴 조회
+
+    @Override
+    public List<Routine> newRoutineList() {
+        String sql1 = "select * from Routine order by post_no desc";
+        List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper());
+        return result;
+    }
+
+    //신규 루틴 상세보기
+    @Override
+    public Routine newRoutineDetail(Long post_no) {
+        String sql1 = "select * from Routine where post_no = ?";
+        List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper(), post_no);
+        Routine newRoutineDetail = result.get(0);
+
+        String sql2 = "select * from ToDo where post_no = ?";
+        List<ToDo> result2 = jdbcTemplate.query(sql2, ToDoRowMapper(), post_no);
+
+
+        newRoutineDetail.setTodo_list(result2);
+
+
+        return newRoutineDetail;
+    }
+
+    @Override
+    public List<Routine> startTimeList(String startTime) {
+        String sql1 = "select * from Routine where startTime = ?";
+        List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper(), startTime);
+        return result;
+    }
 
     //루틴 삭제
     @Override
@@ -66,6 +98,16 @@ public class JDBCRoutineRepository implements RoutineRepository{
         jdbcTemplate.update(sql2, post_no);
 
         return "루틴이 삭제되었습니다";
+    }
+
+
+    ////
+    public Long controller_getPostNo(){
+        try {
+            String sql = "SELECT max(post_no) FROM Routine;";
+            Long count = jdbcTemplate.queryForObject(sql, Long.class);
+            return count; }
+        catch (Exception e) { Long count = 1L ; return count;}
     }
 
     private RowMapper<Routine> RoutineRowMapper() {
@@ -80,13 +122,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
             return routine;
         };
     }
-    public Long controller_getPostNo(){
-        try {
-            String sql = "SELECT max(post_no) FROM Routine;";
-            Long count = jdbcTemplate.queryForObject(sql, Long.class);
-            return count; }
-        catch (Exception e) { Long count = 1L ; return count;}
-    }
+
     private RowMapper<ToDo> ToDoRowMapper() {
         return (rs, rowNum) -> {
             ToDo todo = new ToDo();

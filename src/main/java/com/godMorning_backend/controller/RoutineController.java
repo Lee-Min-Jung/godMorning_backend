@@ -10,10 +10,7 @@ import com.mysql.cj.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,6 +72,25 @@ public class RoutineController {
         return routineServiceImpl.findByIdDate(id, create_date);
 
     }
+    //신규 루틴 조회
+    @RequestMapping(value="newRoutine/list")
+    public List<Routine> newRoutineList(){
+        return routineServiceImpl.newRoutineList();
+    }
+
+    //신규 루틴 상세 조회
+    @RequestMapping(value="newRoutine/list/{post_no}")
+    public Routine newRoutineDetail(@PathVariable("post_no") Long post_no, HttpServletRequest request, Model model){
+
+        return routineServiceImpl.newRoutineDetail(post_no);
+    }
+
+    //시간대 루틴 조회
+    @RequestMapping(value="timezone/list/{startTime}")
+    public List<Routine> timezoneList(@PathVariable("startTime") String startTime){
+        return routineServiceImpl.startTimeList(startTime);
+    }
+
 
     //루틴 저장
     //create자리에 루틴 post_no가 오면 좋을 것 같음
