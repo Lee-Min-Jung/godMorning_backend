@@ -65,7 +65,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
         return result;
     }
 
-    //신규 루틴 상세보기
+    //신규 루틴 상세조회
     @Override
     public Routine newRoutineDetail(Long post_no) {
         String sql1 = "select * from Routine where post_no = ?";
@@ -82,11 +82,30 @@ public class JDBCRoutineRepository implements RoutineRepository{
         return newRoutineDetail;
     }
 
+    //시간대별 루틴
     @Override
     public List<Routine> startTimeList(String startTime) {
         String sql1 = "select * from Routine where startTime = ?";
         List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper(), startTime);
         return result;
+    }
+
+    //시간대별 루틴 상세조회
+
+    @Override
+    public Routine startTimeDetail(String startTime, Long post_no) {
+        String sql1 = "select * from Routine where startTime = ? and post_no = ?";
+        List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper(), startTime, post_no);
+        Routine startTimeDetail = result.get(0);
+
+        String sql2 = "select * from ToDo where post_no = ?";
+        List<ToDo> result2 = jdbcTemplate.query(sql2, ToDoRowMapper(), post_no);
+
+
+        startTimeDetail.setTodo_list(result2);
+
+
+        return startTimeDetail;
     }
 
     //루틴 삭제

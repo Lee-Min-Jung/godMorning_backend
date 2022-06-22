@@ -46,6 +46,14 @@ public class RoutineServiceImpl implements RoutineService{
         return jdbcRoutineRepository.startTimeList(startTime);
     }
 
+    //시간대 루틴 상세조회
+
+
+    @Override
+    public Routine startTimeDetail(String startTime, Long post_no) {
+        return jdbcRoutineRepository.startTimeDetail(startTime, post_no);
+    }
+
     //루틴 저장
     @Override
     public int saveRoutine(Routine routine) {

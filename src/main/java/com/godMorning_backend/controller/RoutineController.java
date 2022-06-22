@@ -91,9 +91,15 @@ public class RoutineController {
         return routineServiceImpl.startTimeList(startTime);
     }
 
+    //시간대 루틴 상세조회
+    @RequestMapping(value="timezone/list/{startTime}/{post_no}")
+    public Routine timezoneDetail(@PathVariable("startTime") String startTime, @PathVariable("post_no") Long post_no){
+        return routineServiceImpl.startTimeDetail(startTime, post_no);
+    }
 
     //루틴 저장
     //create자리에 루틴 post_no가 오면 좋을 것 같음
+    @CrossOrigin(origins="*", allowedHeaders = "*")
     @PostMapping(value = "routine/create",   produces = "application/json; charset=UTF-8")
     public Routine save(@RequestBody Routine routine) {
         SessionUser user = (SessionUser) httpSession.getAttribute("google_user");

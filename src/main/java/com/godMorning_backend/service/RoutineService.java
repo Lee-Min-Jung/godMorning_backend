@@ -19,11 +19,14 @@ public interface RoutineService {
     //신규 루틴 조회
     List<Routine> newRoutineList();
 
-    //신규 루틴 상세 조회
+    //신규 루틴 상세조회
     Routine newRoutineDetail(Long post_no);
 
     //시간대 루틴 조회
     List<Routine> startTimeList(String startTime);
+
+    //시간대 루틴 상세조회
+    Routine startTimeDetail(String startTime, Long post_no);
 
     //루틴 수정
 
