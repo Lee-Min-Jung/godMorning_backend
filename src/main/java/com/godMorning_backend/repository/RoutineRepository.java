@@ -29,6 +29,6 @@ public interface RoutineRepository {
     List<Routine> startTimeList(int startTime);
 
     //시간대별 루틴 상세조회
-    Routine startTimeDetail(String startTime, Long post_no);
+    Routine startTimeDetail(int startTime, Long post_no);
 
 }

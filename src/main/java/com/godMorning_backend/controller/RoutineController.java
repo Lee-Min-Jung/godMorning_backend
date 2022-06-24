@@ -94,7 +94,7 @@ public class RoutineController {
 
     //시간대 루틴 상세조회
     @RequestMapping(value="timezone/list/{startTime}/{post_no}")
-    public Routine timezoneDetail(@PathVariable("startTime") String startTime, @PathVariable("post_no") Long post_no){
+    public Routine timezoneDetail(@PathVariable("startTime") int startTime, @PathVariable("post_no") Long post_no){
         return routineServiceImpl.startTimeDetail(startTime, post_no);
     }
 

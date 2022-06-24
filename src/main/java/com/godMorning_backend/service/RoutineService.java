@@ -26,7 +26,7 @@ public interface RoutineService {
     List<Routine> startTimeList(int startTime);
 
     //시간대 루틴 상세조회
-    Routine startTimeDetail(String startTime, Long post_no);
+    Routine startTimeDetail(int startTime, Long post_no);
 
     //루틴 수정
 

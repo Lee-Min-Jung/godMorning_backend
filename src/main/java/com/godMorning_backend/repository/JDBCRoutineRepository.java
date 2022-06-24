@@ -93,7 +93,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
     //시간대별 루틴 상세조회
 
     @Override
-    public Routine startTimeDetail(String startTime, Long post_no) {
+    public Routine startTimeDetail(int startTime, Long post_no) {
         String sql1 = "select * from Routine where startTime = ? and post_no = ?";
         List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper(), startTime, post_no);
         Routine startTimeDetail = result.get(0);

@@ -50,7 +50,7 @@ public class RoutineServiceImpl implements RoutineService{
 
 
     @Override
-    public Routine startTimeDetail(String startTime, Long post_no) {
+    public Routine startTimeDetail(int startTime, Long post_no) {
         return jdbcRoutineRepository.startTimeDetail(startTime, post_no);
     }
 
