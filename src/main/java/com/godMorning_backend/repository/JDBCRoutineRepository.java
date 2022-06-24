@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
+import com.godMorning_backend.domain.user.User;
 import javax.sql.DataSource;
 import java.util.List;
 
@@ -68,16 +68,30 @@ public class JDBCRoutineRepository implements RoutineRepository{
     //신규 루틴 상세조회
     @Override
     public Routine newRoutineDetail(Long post_no) {
+
+        //id 뽑기
+        String sql0 = "select * from Routine where post_no = ?";
+        List<Routine> result0 = jdbcTemplate.query(sql0, RoutineRowMapper(), post_no);
+        Long idResult = result0.get(0).getId();
+
+
+        //뽑은 id로 name 뽑기
+        String sql01 = "select * from google_user where id = ?";
+        List<User> result01 = jdbcTemplate.query(sql01, UserRowMapper(), idResult );
+        String nameResult = result01.get(0).getName();
+
+        //post_no에 맞는 루틴 뽑기
         String sql1 = "select * from Routine where post_no = ?";
         List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper(), post_no);
         Routine newRoutineDetail = result.get(0);
 
+        //post_no에 맞는 투두뽑기
         String sql2 = "select * from ToDo where post_no = ?";
         List<ToDo> result2 = jdbcTemplate.query(sql2, ToDoRowMapper(), post_no);
 
-
+        //routine에 todo랑 name 설정
         newRoutineDetail.setTodo_list(result2);
-
+        newRoutineDetail.setName(nameResult);
 
         return newRoutineDetail;
     }
@@ -139,6 +153,18 @@ public class JDBCRoutineRepository implements RoutineRepository{
             routine.setStartTime((rs.getString("startTime")));
             routine.setEndTime((rs.getString("endTime")));
             return routine;
+        };
+    }
+
+    private RowMapper<User> UserRowMapper() {
+        return (rs, rowNum) -> {
+            User user = new User();
+            user.setId((rs.getLong("id")));
+            user.setName((rs.getString("name")));
+            user.setEmail((rs.getString("email")));
+            user.setPicture((rs.getString("picture")));
+
+            return user;
         };
     }
 
