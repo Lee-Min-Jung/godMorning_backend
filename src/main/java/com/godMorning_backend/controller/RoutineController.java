@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +88,7 @@ public class RoutineController {
 
     //시간대 루틴 조회
     @RequestMapping(value="timezone/list/{startTime}")
-    public List<Routine> timezoneList(@PathVariable("startTime") String startTime){
+    public List<Routine> timezoneList(@PathVariable("startTime") int startTime){
         return routineServiceImpl.startTimeList(startTime);
     }
 
@@ -96,6 +97,8 @@ public class RoutineController {
     public Routine timezoneDetail(@PathVariable("startTime") String startTime, @PathVariable("post_no") Long post_no){
         return routineServiceImpl.startTimeDetail(startTime, post_no);
     }
+
+    //최신순 루틴 모두 보기
 
     //루틴 저장
     //create자리에 루틴 post_no가 오면 좋을 것 같음
@@ -112,6 +115,7 @@ public class RoutineController {
         String startTime = "";
         String endTime = "";
 
+        System.out.print(id);
         id = routine.getId();
         title = routine.getTitle();
         create_date = routine.getCreate_date();

@@ -42,7 +42,7 @@ public class RoutineServiceImpl implements RoutineService{
     //시간대 루틴 조회
 
     @Override
-    public List<Routine> startTimeList(String startTime) {
+    public List<Routine> startTimeList(int startTime) {
         return jdbcRoutineRepository.startTimeList(startTime);
     }
 
