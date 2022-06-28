@@ -134,7 +134,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
     }
 
 
-    ////
+    //컨트롤러에서 post_no의 최댓값 찾기 위한 메소드
     public Long controller_getPostNo(){
         try {
             String sql = "SELECT max(post_no) FROM Routine;";
@@ -143,6 +143,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
         catch (Exception e) { Long count = 1L ; return count;}
     }
 
+    //routine mapper
     private RowMapper<Routine> RoutineRowMapper() {
         return (rs, rowNum) -> {
             Routine routine = new Routine();
@@ -156,6 +157,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
         };
     }
 
+    //user mapper
     private RowMapper<User> UserRowMapper() {
         return (rs, rowNum) -> {
             User user = new User();
@@ -168,6 +170,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
         };
     }
 
+    //toDo mapper
     private RowMapper<ToDo> ToDoRowMapper() {
         return (rs, rowNum) -> {
             ToDo todo = new ToDo();
