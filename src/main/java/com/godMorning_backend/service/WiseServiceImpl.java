@@ -16,7 +16,7 @@ public class WiseServiceImpl implements WiseService{
     @Override
     public String findByNo() {
         Random random = new Random();
-        int random_no = random.nextInt(10) +1;
+        int random_no = random.nextInt(50) +1;
         return jdbcWiseRepository.findByNo(random_no);
     }
 }
