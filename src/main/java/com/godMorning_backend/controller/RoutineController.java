@@ -1,6 +1,5 @@
 package com.godMorning_backend.controller;
 
-import com.godMorning_backend.config.auth.dto.SessionUser;
 import com.godMorning_backend.domain.Routine;
 import com.godMorning_backend.domain.ToDo;
 import com.godMorning_backend.repository.JDBCRoutineRepository;
@@ -24,7 +23,7 @@ public class RoutineController {
     private JdbcTemplate jdbcTemplate;
     private RoutineServiceImpl routineServiceImpl;
     private ToDoServiceImpl toDoServiceImpl;
-    private SessionUser sessionUser;
+
     private JDBCRoutineRepository jdbcRoutineRepository;
     private final HttpSession httpSession;
 
@@ -105,7 +104,6 @@ public class RoutineController {
     @CrossOrigin(origins="*", allowedHeaders = "*")
     @PostMapping(value = "routine/create",   produces = "application/json; charset=UTF-8")
     public Routine save(@RequestBody Routine routine) {
-        SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
 
         //루틴
         Long count = jdbcRoutineRepository.controller_getPostNo();

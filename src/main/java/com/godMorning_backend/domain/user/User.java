@@ -1,55 +1,40 @@
 package com.godMorning_backend.domain.user;
 
-import com.godMorning_backend.domain.BaseTimeEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+@Data
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
-@Table(name="google_user")
-public class User extends BaseTimeEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@AllArgsConstructor
+@Entity //entity라는 것을 명시하는 어노테이션, table어노테이션 따로 안 하면 클래스 이름이 테이블로 생성된다
+public class User {
+    @Id //기본키 지정
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(unique = true)
+    private String username;
+    private String password;
     private String email;
+    private String roles;
+    private String providerId;
+    private String provider;
 
-    @Column(nullable = false)
-    private String name;
-
-
-
-    @Column
-    private String picture;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
-
-    @Builder
-    public User(Long id, String name, String email, String picture, Role role){
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.picture = picture;
-        this.role = role;
+    public List<String> getRoleList(){
+        if(this.roles.length() >0 ){
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
     }
 
-    public User update(String name, String picture){
-        this.name = name;
-        this.picture = picture;
 
-        return this;
-    }
 
-    public String getRoleKey(){
-        return this.role.getKey();
-    }
+
 }
