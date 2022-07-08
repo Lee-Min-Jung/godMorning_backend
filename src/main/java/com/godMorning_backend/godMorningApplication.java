@@ -18,4 +18,4 @@ public class godMorningApplication{
     }
 
 }
-//연결이 되었나 test
+//연결 과연? 8 55
