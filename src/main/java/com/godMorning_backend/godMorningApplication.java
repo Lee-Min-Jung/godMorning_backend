@@ -18,3 +18,4 @@ public class godMorningApplication{
     }
 
 }
+//연결이 되었나 test
