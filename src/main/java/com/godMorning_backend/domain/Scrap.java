@@ -11,7 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Scrap {
 
-    private long id;
     private long post_no;
+    private long id;
+
 
 }

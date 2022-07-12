@@ -42,8 +42,8 @@ public class JDBCRoutineRepository implements RoutineRepository{
 
         int len = routine.getTodo_list().size();
         for(int i=0;i<len;i++){
-            String sql2 = "INSERT INTO ToDo(post_no, content, check_do) VALUES (?,?,?)";
-            Object[] Params2 = {routine.getTodo_list().get(i).getPost_no(), routine.getTodo_list().get(i).getContent(), routine.getTodo_list().get(i).getCheck_do() };
+            String sql2 = "INSERT INTO ToDo(post_no, content) VALUES (?,?)";
+            Object[] Params2 = {routine.getTodo_list().get(i).getPost_no(), routine.getTodo_list().get(i).getContent() };
             jdbcTemplate.update(sql2, Params2);
         }
 
@@ -199,7 +199,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
             ToDo todo = new ToDo();
             todo.setPost_no((rs.getLong("post_no")));
             todo.setContent((rs.getString("content")));
-            todo.setCheck_do((rs.getInt("check_do")));
+
             return todo;
         };
     }

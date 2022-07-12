@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final AuthenticationManager authenticationManager;
 
 
-    // /login 요청하면 로그인 시도를 위해 실행되는 함수
+    // /login 요청하면 로그인 시도를 위해 실행되는 함수, 로그인한 사람이 입력한 정보로 로그인 되는지 확인
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
@@ -92,6 +92,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 
     @Override
+    //위에 있는 메서드를 통해 로그인이 됨을 확인하면 토큰을 생성해서 헤더에 토큰을 반환해줌
     //attemptAuthentication 실행 후에 인증이 정상적으로 되었을 경우 successfulAuthentication 가 실행됨.
     // 이때 JWT Token 생성해서 response에 담아주기
    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,

@@ -31,9 +31,11 @@ public class JDBCScrapRepository {
         return result;
     }
 
-    public Optional<Scrap> findByUserIdAndPost_no(Long id, Long post_no){
-        String sql = "select * from Scrap where id = ? and post_no = ?";
-        List<Scrap> result = jdbcTemplate.query(sql, scrapRowMapper(), id, post_no);
+    public Optional<Scrap> findByUserIdAndPost_no(Long post_no,Long id){
+        //String sql = "select * from Scrap where id = ? and post_no = ?";
+        String sql = "select * from Scrap where post_no = ? and id = ?";
+
+        List<Scrap> result = jdbcTemplate.query(sql, scrapRowMapper(),  post_no,id);
         return result.stream().findAny();
     }
     //스크랩 삭제
@@ -46,8 +48,8 @@ public class JDBCScrapRepository {
     private RowMapper<Scrap> scrapRowMapper() {
         return (rs, rowNum) -> {
             Scrap scrap = new Scrap();
-            scrap.setId(rs.getLong("id"));
             scrap.setPost_no(rs.getLong("post_no"));
+            scrap.setId(rs.getLong("id"));
             return scrap;
         };
     }

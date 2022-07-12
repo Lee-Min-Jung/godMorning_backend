@@ -107,25 +107,13 @@ public class RoutineController {
 
         //루틴
         Long count = jdbcRoutineRepository.controller_getPostNo();
-        Long id = 0L;
-        String title = "";
-        String create_date = "";
-        String startTime = "";
-        String endTime = "";
-
-        System.out.print(id);
-        id = routine.getId();
-        title = routine.getTitle();
-        create_date = routine.getCreate_date();
-        startTime = routine.getStartTime();
-        endTime = routine.getEndTime();
 
         routine.setPost_no(++count);
-        routine.setId(id);
-        routine.setTitle(title);
-        routine.setCreate_date(create_date);
-        routine.setStartTime(startTime);
-        routine.setEndTime(endTime);
+        routine.setId(routine.getId());
+        routine.setTitle(routine.getTitle());
+        routine.setCreate_date(routine.getCreate_date());
+        routine.setStartTime(routine.getStartTime());
+        routine.setEndTime(routine.getEndTime());
 
 
         //투두
@@ -135,17 +123,14 @@ public class RoutineController {
 
 
         String content = "";
-        //int check_do = 0;
 
         for(int i=0;i<len;i++){
             ToDo setToDo = new ToDo();
 
             content = routine.getTodo_list().get(i).getContent();
-            //check_do = routine.getTodo_list().get(i).getCheck_do();
 
             setToDo.setPost_no(count);
             setToDo.setContent(content);
-            setToDo.setCheck_do(0);
 
             set_todo_list.add(setToDo);
 

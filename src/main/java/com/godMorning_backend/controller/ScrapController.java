@@ -30,14 +30,9 @@ public class ScrapController {
     @ResponseBody
     @PostMapping(value = "scrap/create", produces = "application/json; charset=UTF-8")
     public Scrap save(@RequestBody Scrap scr) {
-        Long id = 0L;
-        Long post_no = 0L;
 
-        id = scr.getId();
-        post_no = scr.getPost_no();
-
-        scr.setId(id);
-        scr.setPost_no(post_no);
+        scr.setPost_no(scr.getPost_no());
+        scr.setId(scr.getId());
 
         scrapServiceImpl.saveScrap(scr);
         return scr;

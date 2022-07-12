@@ -11,7 +11,7 @@ public class ToDo {
 
     private Long post_no;
     private String content;
-    private int check_do;
+
 
 
 }

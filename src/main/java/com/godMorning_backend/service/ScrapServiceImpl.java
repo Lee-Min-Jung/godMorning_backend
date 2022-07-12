@@ -16,7 +16,7 @@ public class ScrapServiceImpl {
     }
 
     public String saveScrap(Scrap scrap) {
-        if (jdbcScrapRepository.findByUserIdAndPost_no(scrap.getId(), scrap.getPost_no()).isPresent()){
+        if (jdbcScrapRepository.findByUserIdAndPost_no(scrap.getPost_no(),scrap.getId()).isPresent()){
             return "이미 스크랩되었습니다";
         } else {
             jdbcScrapRepository.saveScrap(scrap);

@@ -21,7 +21,7 @@ public class JDBCToDoRepository implements ToDoRepository{
     @Override
     public void saveToDo(ToDo todo) {
         String sql = "INSERT INTO ToDo(post_no, content, check_do) VALUES(?,?,?)";
-        Object[] Params = {todo.getPost_no(), todo.getContent(), todo.getCheck_do()};
+        Object[] Params = {todo.getPost_no(), todo.getContent()};
         jdbcTemplate.update(sql,Params);
     }
 
@@ -30,7 +30,7 @@ public class JDBCToDoRepository implements ToDoRepository{
             ToDo todo = new ToDo();
             todo.setPost_no((rs.getLong("post_no")));
             todo.setContent((rs.getString("content")));
-            todo.setCheck_do((rs.getInt("check_do")));
+
             return todo;
         };
     }
