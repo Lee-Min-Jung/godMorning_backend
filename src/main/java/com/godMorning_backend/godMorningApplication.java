@@ -18,4 +18,3 @@ public class godMorningApplication{
     }
 
 }
-//연결 과연? 8 57
