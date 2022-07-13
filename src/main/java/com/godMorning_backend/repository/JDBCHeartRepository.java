@@ -3,19 +3,21 @@ package com.godMorning_backend.repository;
 import com.godMorning_backend.domain.Heart;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class JDBCHeartRepository {
+
     private JdbcTemplate jdbcTemplate;
     private JDBCHeartRepository jdbcHeartRepository;
 
     public JDBCHeartRepository(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
-
 
     public String deleteHeart(Long id, Long post_no) {
         String sql = "delete from Heart where id = ? and post_no = ?";
