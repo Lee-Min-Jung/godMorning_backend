@@ -145,6 +145,33 @@ public class JDBCRoutineRepository implements RoutineRepository{
         return timezoneDetail;
     }
 
+    //나의 루틴 전체 보기
+
+    @Override
+    public List<Routine> myRoutine(Long id) {
+        String sql1 = "select * from Routine where id = ?";
+        List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper(), id);
+        return result;
+    }
+
+    //나의 루틴 상세보기
+    @Override
+    public Routine myRoutineDetail(Long id, Long post_no){
+        //id와 post_no에 맞는 루틴 뽑기
+        String sql1 = "select * from Routine where id = ? and post_no = ?";
+        List<Routine> routineResult = jdbcTemplate.query(sql1, RoutineRowMapper(), id, post_no);
+
+        //post_no에 맞는 투두 뽑기
+        String sql2 = "select * from ToDo where post_no = ?";
+        List<ToDo> todoResult = jdbcTemplate.query(sql2, ToDoRowMapper(), post_no);
+
+        //뽑은 루틴에 투두 설정
+        routineResult.get(0).setTodo_list(todoResult);
+
+        return routineResult.get(0);
+
+    }
+
     //루틴 삭제
     @Override
     public String deleteRoutine(int post_no) {

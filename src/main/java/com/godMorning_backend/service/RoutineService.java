@@ -28,6 +28,12 @@ public interface RoutineService {
     //시간대 루틴 상세조회
     Routine startTimeDetail(int startTime, Long post_no);
 
+    //나의 루틴 전체보기
+    List<Routine> myRoutine(Long id);
+
+    //나의 루틴 상세보기
+    Routine myRoutineDetail(Long id, Long post_no);
+
     //루틴 수정
 
 }

@@ -1,7 +1,6 @@
 package com.godMorning_backend.repository;
 
 import com.godMorning_backend.domain.Routine;
-import com.godMorning_backend.domain.Test;
 import com.godMorning_backend.domain.ToDo;
 
 import java.util.List;
@@ -30,5 +29,11 @@ public interface RoutineRepository {
 
     //시간대별 루틴 상세조회
     Routine startTimeDetail(int startTime, Long post_no);
+
+    //나의 루틴 전체 조회
+    List<Routine> myRoutine(Long id);
+
+    //나의 루틴 상세 보기
+    Routine myRoutineDetail(Long id, Long post_no);
 
 }

@@ -2,7 +2,7 @@ package com.godMorning_backend.config;
 
 
 import com.godMorning_backend.domain.Routine;
-import com.godMorning_backend.domain.Test;
+
 import com.godMorning_backend.repository.JDBCRoutineRepository;
 import com.godMorning_backend.repository.RoutineRepository;
 import org.springframework.context.annotation.Bean;
@@ -31,10 +31,7 @@ public class springConfig {
         return new Routine();
     }
 
-    @Bean
-    Test test() {
-        return new Test();
-    }
+
 
 
 

@@ -37,13 +37,30 @@ public class ScrapController {
         scrapServiceImpl.saveScrap(scr);
         return scr;
     }
-
-    @RequestMapping(value = "scrap/list", produces = "application/json; charset=UTF-8")
-    public List<Routine> findById(HttpServletRequest request, Model model){
-        Long id =  Long.parseLong(request.getParameter("id"));
-        model.addAttribute("id", id);
+    //아이디별 스크랩 전체 조회
+    @RequestMapping(value="scrap/list/{id}")
+    public List<Routine> timezoneList(@PathVariable("id") long id){
         return scrapServiceImpl.findById(id);
     }
+
+    //아이디별 스크랩 조회 상세 보기
+    @RequestMapping(value="scrap/list/{id}/{post_no}")
+    public Routine timezoneDetail(@PathVariable("id") long id, @PathVariable("post_no") long post_no){
+        return scrapServiceImpl.findByIdAndPostNo(id, post_no);
+    }
+    //아이디별 스크랩 전체 보기
+//    @RequestMapping(value = "scrap/list", produces = "application/json; charset=UTF-8")
+//    public List<Routine> findById(HttpServletRequest request){
+//        Long id =  Long.parseLong(request.getParameter("id"));
+//        return scrapServiceImpl.findById(id);
+//    }
+
+    //아이디별 스크랩 상세 보기
+//    @RequestMapping(value = "scrap/list", produces = "application/json; charset=UTF-8")
+//    public List<Routine> findById(HttpServletRequest request){
+//        Long id =  Long.parseLong(request.getParameter("id"));
+//        return scrapServiceImpl.findById(id);
+//    }
 
     @RequestMapping(value = "scrap/delete")
     public String deleteScrap(HttpServletRequest request, Model model){
