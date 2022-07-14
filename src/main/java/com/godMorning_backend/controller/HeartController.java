@@ -24,8 +24,8 @@ public class HeartController {
         this.heartServiceImpl = heartServiceImpl;
         this.jdbcHeartRepository = jdbcHeartRepository;
         this.heart = heart;
-
     }
+
     @ResponseBody
     @PostMapping(value = "heart/insert", produces = "application/json; charset=UTF-8")
     public Heart insert(@RequestBody Heart ht) {
@@ -39,6 +39,8 @@ public class HeartController {
         ht.setPost_no(post_no);
 
         heartServiceImpl.insertHeart(ht);
+
+
         return ht;
     }
 

@@ -28,7 +28,15 @@ public class HeartServiceImpl {
         return String.valueOf(heart.getId());
     }
 
+/*
+    public void heartIncrement(Heart heart) {
 
+       if (heart.getH_number() == 0) {
+           jdbcHeartRepository.heartIncrement(heart);
+       }
+       else
+        jdbcHeartRepository.heartIncrement(heart);
+    }
 
-
+*/
 }
