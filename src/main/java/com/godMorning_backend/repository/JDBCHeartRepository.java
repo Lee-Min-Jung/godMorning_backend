@@ -71,7 +71,6 @@ public class JDBCHeartRepository {
         return result.stream().findAny();
     }
 }
-
     /*
     public void heartIncrement(Heart heart) {
         String sql= "update Heart set h_number = h_number + 1 where post_no = ? and id=?";
