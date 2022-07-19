@@ -1,4 +1,5 @@
 package com.godMorning_backend.controller;
+import com.godMorning_backend.service.UserService;
 import org.springframework.security.core.Authentication;
 import com.godMorning_backend.config.auth.PrincipalDetails;
 import com.godMorning_backend.repository.UserRepository;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -19,73 +21,38 @@ public class UserController {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserService userService;
 
-    @GetMapping("home")
-    public String home(){
-
-        return "<h1>home</h1>";
-    }
-    @GetMapping("user") //user 권한 테스트
-    public String user(){
-        return "user";
-    }
-    @GetMapping("manager") //manager 권한 테스트
-    public String manager(){
-        return "manager";
-    }
-
-    @GetMapping("admin") //admin 권한 테스트
-    public String admin(){
-        return "admin";
-    }
-
-//    @GetMapping("user")
-//    public String user(Authentication authentication) {
-//        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-//        System.out.println("principal : "+principal.getUser().getId());
-//        System.out.println("principal : "+principal.getUser().getUsername());
-//        System.out.println("principal : "+principal.getUser().getPassword());
-//        System.out.println("principal : "+principal.getUser().getRoles());
-//
-//        return "user";
-//    }
-
-
-    @GetMapping("admin/users")
-    public List<User> users(){
-
-        return userRepository.findAll();
-    }
 
     @PostMapping("join") //회원가입하는 컨트롤러
-    public String join(@RequestBody User user){
+    public String join(@RequestBody User user) {
         user.setEmail(user.getEmail());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles("ROLE_USER");
         userRepository.save(user);
         return "회원가입완료";
     }
-    //일단 급해서 bye라고 해 놓긴 했는데.. 수정필요
-//    @GetMapping("/bye")
-//    public SessionUser bye(Model model){
-//        SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
-//
-//
-//        if(user != null) {
-//            model.addAttribute("name", user.getName());
-//        }
-//        return user;
-//    }
 
-//    @GetMapping("/home")
-//    public SessionUser index(Model model){
-//        SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
-//
-//
-//        if(user != null) {
-//            model.addAttribute("name", user.getName());
-//        }
-//        return user;
-//    }
+    @PostMapping("withdrawal") //회원탈퇴하는 컨트롤러
+    public String withdrawal(@RequestBody User user) {
+
+        //optional 부분 더 좋게 바꿀 수 있을 것 같은데...
+        //입력받은 이메일을 통해 DB에서 해당 이메일 회원 조회
+        Optional<User> checkUser = Optional.ofNullable(userRepository.findByEmail(user.getEmail()));
+
+        if (checkUser.isPresent()){//입력 이메일이 DB에 있는 경우
+            User findUser = userRepository.findByEmail(user.getEmail());
+            return userService.withdrawal(user, findUser);
+        }
+       else{ //입력 이메일이 DB에 없는 경우
+           return "이메일을 정확하게 입력해주세요";
+        }
+
+
+
+    }
 
 }
+
+
+

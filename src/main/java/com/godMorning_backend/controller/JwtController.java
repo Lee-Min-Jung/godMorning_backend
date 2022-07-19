@@ -3,7 +3,7 @@ package com.godMorning_backend.controller;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.godMorning_backend.config.jwt.JwtProperties;
+import com.godMorning_backend.jwt.JwtProperties;
 import com.godMorning_backend.config.oauth.provider.GoogleUser;
 import com.godMorning_backend.config.oauth.provider.OAuthUserInfo;
 import com.godMorning_backend.domain.user.User;
@@ -13,12 +13,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
-public class JwtCreateController {
+public class JwtController {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -52,11 +54,18 @@ public class JwtCreateController {
         //토큰 만들어서 반환
         String jwtToken = JWT.create()
                 .withSubject(userEntity.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.EXPIRATION_TIME))
+                .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_EXPIRATION_TIME))
                 .withClaim("id", userEntity.getId())
                 .withClaim("username", userEntity.getUsername())
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
         return jwtToken;
     }
+
+    //프엔으로부터 refresh token 받아서 유효성 검사
+//    @PostMapping("/refresh")
+//    public String validateRefreshToken(@RequestBody HashMap<String, String> bodyJson){
+//        System.out.println("refresh controller 실행");
+//        Map<String, String> map =
+//    }
 }

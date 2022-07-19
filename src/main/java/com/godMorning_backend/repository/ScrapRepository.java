@@ -15,6 +15,9 @@ public interface ScrapRepository {
     //
     Optional<Scrap> findByUserIdAndPost_no(Long id, Long post_no);
 
+    //스크랩 상세보기 조회
+    Routine findByIdAndPost_no(Long id, Long post_no);
+
     //스크랩 삭제
     String deleteScrap(Long id, Long post_no);
 }

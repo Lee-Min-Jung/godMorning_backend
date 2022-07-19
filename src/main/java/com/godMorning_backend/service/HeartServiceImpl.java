@@ -32,14 +32,12 @@ public class HeartServiceImpl {
 
 /*
     public void heartIncrement(Heart heart) {
-
        if (heart.getH_number() == 0) {
            jdbcHeartRepository.heartIncrement(heart);
        }
        else
         jdbcHeartRepository.heartIncrement(heart);
     }
-
 */
     public List<Heart> heartRank(Long post_no) {
 

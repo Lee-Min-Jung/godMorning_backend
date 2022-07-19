@@ -1,4 +1,4 @@
-package com.godMorning_backend.config.jwt;
+package com.godMorning_backend.jwt;
 //헤더에 있는 토큰 보고 정상 토큰인지 확인하는 필터
 
 //시큐리티는 BasicAuthentication 이라는 필터를 가지고 있다.

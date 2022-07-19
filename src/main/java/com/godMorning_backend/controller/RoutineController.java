@@ -97,7 +97,17 @@ public class RoutineController {
         return routineServiceImpl.startTimeDetail(startTime, post_no);
     }
 
-    //최신순 루틴 모두 보기
+    //나의 루틴 전체 보기
+    @RequestMapping(value="myRoutine/{id}")
+    public List<Routine> timezoneList(@PathVariable("id") Long id){
+        return routineServiceImpl.myRoutine(id);
+    }
+
+    //나의 루틴 상세 보기
+    @RequestMapping(value="myRoutine/{id}/{post_no}")
+    public Routine timezoneList(@PathVariable("id") Long id, @PathVariable("post_no") Long post_no){
+        return routineServiceImpl.myRoutineDetail(id, post_no);
+    }
 
     //루틴 저장
     //create자리에 루틴 post_no가 오면 좋을 것 같음

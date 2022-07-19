@@ -1,12 +1,11 @@
 package com.godMorning_backend.config.auth;
 
-import com.godMorning_backend.config.jwt.JwtAuthenticationFilter;
-import com.godMorning_backend.config.jwt.JwtAuthorizationFilter;
+import com.godMorning_backend.jwt.JwtAuthenticationFilter;
+import com.godMorning_backend.jwt.JwtAuthorizationFilter;
 
 
 import com.godMorning_backend.repository.UserRepository;
 
-import lombok.RequiredArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -49,13 +48,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository))
                 .authorizeRequests()
                 .antMatchers("/routine/**").access("hasRole('ROLE_USER')")
-                //.antMatchers("/newRoutine/**").access("hasRole('ROLE_USER')")
-                //.antMatchers("/timezone/**").access("hasRole('ROLE_USER')")
-                .antMatchers("/scrap/**").access("hasRole('ROLE_USER')")
-                .antMatchers("/user/**").access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/manager/**").access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/scrap/create").access("hasRole('ROLE_USER')")
+                .antMatchers("/scrap/delete").access("hasRole('ROLE_USER')")
                 .anyRequest().permitAll();
+
+
 
 
 

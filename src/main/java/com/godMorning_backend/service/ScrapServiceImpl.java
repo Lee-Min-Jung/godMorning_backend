@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ScrapServiceImpl {
+public class ScrapServiceImpl implements ScrapService{
     private final JDBCScrapRepository jdbcScrapRepository;
 
     public ScrapServiceImpl(JDBCScrapRepository jdbcScrapRepository){
@@ -26,6 +26,13 @@ public class ScrapServiceImpl {
 
     public List<Routine> findById(Long id) {
         return jdbcScrapRepository.findById(id);
+    }
+
+
+
+    @Override
+    public Routine findByIdAndPostNo(Long id, Long post_no) {
+        return jdbcScrapRepository.findByIdAndPost_no(id, post_no);
     }
 
     public String deleteScrap(Long id, Long post_no){

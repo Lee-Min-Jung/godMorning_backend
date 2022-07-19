@@ -1,4 +1,4 @@
-package com.godMorning_backend.config.jwt;
+package com.godMorning_backend.jwt;
 //로그인 진행되면 토큰을 생성해주도록 하는 필터
         //1. username이랑 password 받아서
 
@@ -100,14 +100,27 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         System.out.println("인증이 완료되었음");
         PrincipalDetails principalDetailis = (PrincipalDetails) authResult.getPrincipal();
 
-        //hash 암호 방식
-        String jwtToken = JWT.create()
+        //access token 발행
+        String accessToken = JWT.create()
                 .withSubject(principalDetailis.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis()+JwtProperties.EXPIRATION_TIME))
+                .withExpiresAt(new Date(System.currentTimeMillis()+JwtProperties.ACCESS_EXPIRATION_TIME))
                 .withClaim("id", principalDetailis.getUser().getId())
                 .withClaim("username", principalDetailis.getUser().getUsername())
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
-        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX+jwtToken);
+        //refresh token 발행
+//        String refreshToken = JWT.create()
+//                .withSubject(principalDetailis.getUsername())
+//                .withExpiresAt(new Date(System.currentTimeMillis()+JwtProperties.REFRESH_EXPIRATION_TIME))
+//                .withClaim("id", principalDetailis.getUser().getId())
+//                .withClaim("username", principalDetailis.getUser().getUsername())
+//                .sign(Algorithm.HMAC512(JwtProperties.SECRET));
+
+        //발행한 토큰 header에 넣어주기
+        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX+accessToken);
+//        response.addHeader(JwtProperties.REFRESH_HEADER_STRING, JwtProperties.TOKEN_PREFIX+refreshToken);
+
+
+
     }
 }
