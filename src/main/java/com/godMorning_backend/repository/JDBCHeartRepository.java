@@ -45,7 +45,6 @@ public class JDBCHeartRepository {
             jdbcTemplate.update(sql1, Params1);
         }
         */
-
     }
 
     public List<Heart> heartRank(Long post_no) {
