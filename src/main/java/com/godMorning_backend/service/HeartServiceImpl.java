@@ -39,8 +39,8 @@ public class HeartServiceImpl {
         jdbcHeartRepository.heartIncrement(heart);
     }
 */
-    public List<Heart> heartRank(Long post_no) {
+    public List<Heart> heartRank() {
 
-        return jdbcHeartRepository.heartRank(post_no);
+        return jdbcHeartRepository.heartRank();
     }
 }

@@ -47,10 +47,10 @@ public class JDBCHeartRepository {
         */
     }
 
-    public List<Heart> heartRank(Long post_no) {
+    public List<Heart> heartRank() {
 
-        String sql1 = "select count (post_no) from Heart where post_no=?";
-        return jdbcTemplate.query(sql1, HeartRowMapper(), post_no);
+        String sql1 = "select post_no, count(h_number) from Heart group by post_no order by count(h_number) desc;";
+        return jdbcTemplate.query(sql1, HeartRowMapper());
 
     }
 

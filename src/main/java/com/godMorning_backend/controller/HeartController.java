@@ -54,11 +54,8 @@ public class HeartController {
     }
 
     @RequestMapping(value = "heart/rank")
-    public List<Heart> heartRank(HttpServletRequest request, Model model) {
-
-        Long post_no = Long.parseLong(request.getParameter("post_no"));
-        model.addAttribute("post_no", post_no);
-        return heartServiceImpl.heartRank(post_no);
+    public List<Heart> heartRank() {
+        return heartServiceImpl.heartRank();
     }
 
 
