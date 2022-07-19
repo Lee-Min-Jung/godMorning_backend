@@ -83,7 +83,6 @@ public class JDBCHeartRepository {
 
         String sql1 = "select distinct post_no, rank() over (order by h_number) as ranking from Heart";
         //String sql2 = "select MAX(h_number) where post_no=? from Heart";
-
         List<Heart> rank = jdbcTemplate.query(sql1, HeartRowMapper(), post_no);
         //List<Heart> max = jdbcTemplate.query(sql2, HeartRowMapper(), post_no);
 
