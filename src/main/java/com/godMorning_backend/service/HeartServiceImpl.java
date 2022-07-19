@@ -4,6 +4,8 @@ import com.godMorning_backend.domain.Heart;
 import com.godMorning_backend.repository.JDBCHeartRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class HeartServiceImpl {
@@ -15,7 +17,7 @@ public class HeartServiceImpl {
     }
 
     public String deleteHeart(Long id, Long post_no) {
-        return jdbcHeartRepository.deleteHeart(id, post_no);
+    return jdbcHeartRepository.deleteHeart(id,post_no);
     }
 
     public String insertHeart(Heart heart) {
@@ -39,4 +41,8 @@ public class HeartServiceImpl {
     }
 
 */
+    public List<Heart> heartRank(Long post_no) {
+
+        return jdbcHeartRepository.heartRank(post_no);
+    }
 }

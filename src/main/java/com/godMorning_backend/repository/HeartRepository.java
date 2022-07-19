@@ -17,5 +17,7 @@ public interface HeartRepository {
 
     void heartIncrement(Heart heart);
 
+    List<Heart> heartRank(Long post_no);
+
     Optional<Heart> findByUserIdAndPost_no(Long id, Long post_no);
 }

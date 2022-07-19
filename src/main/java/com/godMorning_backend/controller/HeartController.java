@@ -40,17 +40,27 @@ public class HeartController {
 
         heartServiceImpl.insertHeart(ht);
 
-
         return ht;
     }
 
-
     @RequestMapping(value = "heart/delete")
-    public String deleteHeart(HttpServletRequest request, Model model){
-        Long id =  Long.parseLong(request.getParameter("id"));
+    public String deleteHeart(HttpServletRequest request, Model model) {
+        Long id = Long.parseLong(request.getParameter("id"));
         Long post_no = Long.parseLong(request.getParameter("post_no"));
         model.addAttribute("id", id);
         model.addAttribute("post_no", post_no);
         return heartServiceImpl.deleteHeart(id, post_no);
+
     }
+
+    @RequestMapping(value = "heart/rank")
+    public List<Heart> heartRank(HttpServletRequest request, Model model) {
+
+        Long post_no = Long.parseLong(request.getParameter("post_no"));
+        model.addAttribute("post_no", post_no);
+        return heartServiceImpl.heartRank(post_no);
+    }
+
+
+
 }
