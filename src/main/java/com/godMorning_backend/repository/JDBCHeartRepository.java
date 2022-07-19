@@ -1,6 +1,8 @@
 package com.godMorning_backend.repository;
 
 import com.godMorning_backend.domain.Heart;
+import com.godMorning_backend.domain.HeartRank;
+import com.godMorning_backend.domain.Routine;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -47,13 +49,20 @@ public class JDBCHeartRepository {
         */
     }
 
-    public List<Heart> heartRank() {
+    public List<HeartRank> heartRank() {
 
-        String sql1 = "select post_no, count(h_number) from Heart group by post_no order by count(h_number) desc;";
-        return jdbcTemplate.query(sql1, HeartRowMapper());
+        String sql1 = "select post_no, count(post_no) from Heart group by post_no order by count(post_no) desc;";
+        List<HeartRank> HeartResult = jdbcTemplate.query(sql1, HeartRankRowMapper());
+        return HeartResult;
 
     }
-
+    private RowMapper<HeartRank> HeartRankRowMapper() {
+        return (rs, rowNum) -> {
+            HeartRank heartRank = new HeartRank();
+            heartRank.setPost_no((rs.getLong("post_no")));
+            return heartRank;
+        };
+    }
     private RowMapper<Heart> HeartRowMapper() {
         return (rs, rowNum) -> {
             Heart heart = new Heart();

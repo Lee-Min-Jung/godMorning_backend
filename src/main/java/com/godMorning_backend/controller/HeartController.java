@@ -1,6 +1,7 @@
 package com.godMorning_backend.controller;
 
 import com.godMorning_backend.domain.Heart;
+import com.godMorning_backend.domain.HeartRank;
 import com.godMorning_backend.repository.JDBCHeartRepository;
 import com.godMorning_backend.service.HeartServiceImpl;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -54,7 +55,7 @@ public class HeartController {
     }
 
     @RequestMapping(value = "heart/rank")
-    public List<Heart> heartRank() {
+    public List<HeartRank> heartRank() {
         return heartServiceImpl.heartRank();
     }
 
