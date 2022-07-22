@@ -6,11 +6,10 @@ import com.godMorning_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import com.godMorning_backend.domain.user.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +31,16 @@ public class UserController {
         userRepository.save(user);
         return "회원가입완료";
     }
+
+    @RequestMapping(value="duplicationCheck") //아이디 중복조회 컨트롤러
+    public String duplicationcheck(HttpServletRequest request, Model model){
+        String username = request.getParameter("username");
+
+        return userService.duplicationCheck(username);
+    }
+
+
+
 
     @PostMapping("withdrawal") //회원탈퇴하는 컨트롤러
     public String withdrawal(@RequestBody User user) {

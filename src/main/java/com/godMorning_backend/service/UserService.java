@@ -5,6 +5,8 @@ import com.godMorning_backend.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -24,6 +26,19 @@ public class UserService {
             return "탈퇴 완료 되었습니다.";
         } else { //비밀번호 일치하지 않을 경우
             return "비밀번호가 틀렸습니다.";
+        }
+    }
+
+    //아이디 중복 검사
+    public String duplicationCheck(String username){
+
+        if (userRepository.existsByUsername(username)){
+
+            return "중복된 아이디입니다.";
+        }
+        else{
+
+            return "사용가능한 아이디입니다.";
         }
     }
 }
