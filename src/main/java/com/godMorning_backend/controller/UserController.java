@@ -1,5 +1,11 @@
 package com.godMorning_backend.controller;
+import com.godMorning_backend.dto.MailDto;
+import com.godMorning_backend.service.MailService;
 import com.godMorning_backend.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import com.godMorning_backend.config.auth.PrincipalDetails;
 import com.godMorning_backend.repository.UserRepository;
@@ -9,19 +15,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
-
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
+
 public class UserController {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserService userService;
-
+    private final MailService mailService;
 
     @PostMapping("join") //회원가입하는 컨트롤러
     public String join(@RequestBody User user) {
@@ -39,7 +46,14 @@ public class UserController {
         return userService.duplicationCheck(username);
     }
 
+    @RequestMapping("sendEmail")
+    public String sendEmail(@RequestParam("email") String email){
+        MailDto mailDto = mailService.createMailAndChangePw(email);
+        System.out.println("***************************************");
+        mailService.mailSend(mailDto);
 
+        return "메일을 전송하였습니다.";
+    }
 
 
     @PostMapping("withdrawal") //회원탈퇴하는 컨트롤러

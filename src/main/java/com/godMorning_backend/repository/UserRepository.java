@@ -10,4 +10,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);//select * from user where username=? 가 호출되도록 해 주는 함수
     User findByEmail(String email);//select * from user where email = ? 가 호출되도록 해 주는 함수
     boolean existsByUsername(String username);//username이 존재하는지 확인해줌
+
 }
