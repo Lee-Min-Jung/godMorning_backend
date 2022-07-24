@@ -13,7 +13,7 @@ public class Routine {
 
     private Long post_no;
     private Long id;
-    private String username;
+    private String nickname;
     private String title;
     private String create_date;
     private String startTime;

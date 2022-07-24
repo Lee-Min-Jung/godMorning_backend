@@ -42,7 +42,7 @@ public class JwtController {
             User userRequest = User.builder()
                     .username(googleUser.getProvider()+"_"+googleUser.getProviderId())
                     .password(bCryptPasswordEncoder.encode("겟인데어"))
-                    .email(googleUser.getEmail())
+                    .nickname(googleUser.getName())
                     .provider(googleUser.getProvider())
                     .providerId(googleUser.getProviderId())
                     .roles("ROLE_USER")

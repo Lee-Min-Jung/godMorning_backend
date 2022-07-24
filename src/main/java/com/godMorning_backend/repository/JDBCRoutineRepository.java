@@ -78,7 +78,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
         //뽑은 id로 name 뽑기
         String sql01 = "select * from user where id = ?";
         List<User> result01 = jdbcTemplate.query(sql01, UserRowMapper(), idResult );
-        String nameResult = result01.get(0).getUsername();
+        String nameResult = result01.get(0).getNickname();
 
         //post_no에 맞는 루틴 뽑기
         String sql1 = "select * from Routine where post_no = ?";
@@ -91,7 +91,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
 
         //routine에 todo랑 name 설정
         newRoutineDetail.setTodo_list(result2);
-        newRoutineDetail.setUsername(nameResult);
+        newRoutineDetail.setNickname(nameResult);
 
         return newRoutineDetail;
     }
@@ -116,7 +116,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
         //뽑은 id로 name 뽑기
         String sql01 = "select * from user where id = ?";
         List<User> result01 = jdbcTemplate.query(sql01, UserRowMapper(), idResult );
-        String nameResult = result01.get(0).getUsername();
+        String nameResult = result01.get(0).getNickname();
 
         //post_no에 맞는 루틴 뽑기
         String sql1 = "select * from Routine where post_no = ?";
@@ -129,7 +129,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
 
         //routine에 todo랑 name 설정
         timezoneDetail.setTodo_list(result2);
-        timezoneDetail.setUsername(nameResult);
+        timezoneDetail.setNickname(nameResult);
 //        String sql1 = "select * from Routine where startTime = ? and post_no = ?";
 //        List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper(), startTime, post_no);
 //        Routine startTimeDetail = result.get(0);
@@ -213,7 +213,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
             User user = new User();
             user.setId((rs.getLong("id")));
             user.setUsername((rs.getString("username")));
-            user.setEmail((rs.getString("email")));
+            user.setNickname((rs.getString("nickname")));
 
 
             return user;

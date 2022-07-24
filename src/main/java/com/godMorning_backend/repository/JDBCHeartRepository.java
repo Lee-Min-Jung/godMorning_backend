@@ -1,13 +1,14 @@
 package com.godMorning_backend.repository;
 
 import com.godMorning_backend.domain.Heart;
-import com.godMorning_backend.domain.HeartRank;
 import com.godMorning_backend.domain.Routine;
+import com.godMorning_backend.dto.HeartRank;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,13 +49,48 @@ public class JDBCHeartRepository {
         }
         */
     }
-
-    public List<HeartRank> heartRank() {
+    //시간대별 루틴
+//    @Override
+//    public List<Routine> startTimeList(int startTime) {
+//        String sql1 = "select * from Routine where startTime = ?";
+//        List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper(), startTime);
+//        return result;
+//    }
+    public List<Routine> heartRank() {
 
         String sql1 = "select post_no, count(post_no) from Heart group by post_no order by count(post_no) desc;";
         List<HeartRank> HeartResult = jdbcTemplate.query(sql1, HeartRankRowMapper());
-        return HeartResult;
 
+        //위에 있는 sql을 통해 뽑은 post_no을 순서대로 리스트에 담기
+        List<Long> postRank = new ArrayList<Long>();
+        for(int i = 0; i< HeartResult.size(); i++){
+            postRank.add(HeartResult.get(i).getPost_no());
+        }
+
+        //위에서 뽑은 post_no을 하나씩 sql2에 넘겨서 결과 뽑아내기
+        List<Routine> result = new ArrayList<Routine>();
+        String sql2 = "select * from Routine where post_no = ?";
+        for(int i = 0; i<postRank.size(); i++){
+            List<Routine> result2 = jdbcTemplate.query(sql2, RoutineRowMapper(), postRank.get(i));
+            result.add(result2.get(0));
+        }
+
+        return result;
+
+    }
+
+    //routine mapper
+    private RowMapper<Routine> RoutineRowMapper() {
+        return (rs, rowNum) -> {
+            Routine routine = new Routine();
+            routine.setPost_no((rs.getLong("post_no")));
+            routine.setId((rs.getLong("id")));
+            routine.setTitle((rs.getString("title")));
+            routine.setCreate_date((rs.getString("create_date")));
+            routine.setStartTime((rs.getString("startTime")));
+            routine.setEndTime((rs.getString("endTime")));
+            return routine;
+        };
     }
     private RowMapper<HeartRank> HeartRankRowMapper() {
         return (rs, rowNum) -> {

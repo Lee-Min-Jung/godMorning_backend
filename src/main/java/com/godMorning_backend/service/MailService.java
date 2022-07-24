@@ -38,9 +38,9 @@ public class MailService {
         return mailDto;
     }
 
-    public void updatePw(String temp, String email){
+    public void updatePw(String temp, String username){
         String tempPw = temp;
-        Long id = userRepository.findByEmail(email).getId();
+        Long id = userRepository.findByUsername(username).getId();
         jdbcUserRepository.setPassword(tempPw, id);
 
     }

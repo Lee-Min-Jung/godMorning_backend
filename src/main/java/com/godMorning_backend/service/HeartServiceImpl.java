@@ -1,7 +1,8 @@
 package com.godMorning_backend.service;
 
 import com.godMorning_backend.domain.Heart;
-import com.godMorning_backend.domain.HeartRank;
+import com.godMorning_backend.domain.Routine;
+import com.godMorning_backend.dto.HeartRank;
 import com.godMorning_backend.repository.JDBCHeartRepository;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,7 @@ public class HeartServiceImpl {
         jdbcHeartRepository.heartIncrement(heart);
     }
 */
-    public List<HeartRank> heartRank() {
+    public List<Routine> heartRank() {
 
         return jdbcHeartRepository.heartRank();
     }

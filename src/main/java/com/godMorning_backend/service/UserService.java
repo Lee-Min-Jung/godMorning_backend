@@ -30,9 +30,9 @@ public class UserService {
     }
 
     //아이디 중복 검사
-    public String duplicationCheck(String username){
+    public String duplicationCheck(String nickname){
 
-        if (userRepository.existsByUsername(username)){
+        if (userRepository.existsByNickname(nickname)){
 
             return "중복된 아이디입니다.";
         }

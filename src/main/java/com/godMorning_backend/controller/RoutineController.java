@@ -99,13 +99,13 @@ public class RoutineController {
 
     //나의 루틴 전체 보기
     @RequestMapping(value="myRoutine/{id}")
-    public List<Routine> timezoneList(@PathVariable("id") Long id){
+    public List<Routine> myList(@PathVariable("id") Long id){
         return routineServiceImpl.myRoutine(id);
     }
 
     //나의 루틴 상세 보기
     @RequestMapping(value="myRoutine/{id}/{post_no}")
-    public Routine timezoneList(@PathVariable("id") Long id, @PathVariable("post_no") Long post_no){
+    public Routine myListDetail(@PathVariable("id") Long id, @PathVariable("post_no") Long post_no){
         return routineServiceImpl.myRoutineDetail(id, post_no);
     }
 

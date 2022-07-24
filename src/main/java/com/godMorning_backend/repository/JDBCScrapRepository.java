@@ -60,7 +60,7 @@ public class JDBCScrapRepository implements ScrapRepository{
         List<ToDo> todoResult = jdbcTemplate.query(sql2, ToDoRowMapper(), post_no);
 
         //검색된 루틴에 이름 설정
-        routineResult.get(0).setUsername(nameResult2);
+        routineResult.get(0).setNickname(nameResult2);
 
         //검색된 루틴에 투두 설정
         routineResult.get(0).setTodo_list(todoResult);
@@ -89,7 +89,7 @@ public class JDBCScrapRepository implements ScrapRepository{
             User user = new User();
             user.setId((rs.getLong("id")));
             user.setUsername((rs.getString("username")));
-            user.setEmail((rs.getString("email")));
+            user.setNickname((rs.getString("nickname")));
 
 
             return user;

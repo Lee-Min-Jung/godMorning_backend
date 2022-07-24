@@ -1,4 +1,4 @@
-package com.godMorning_backend.domain;
+package com.godMorning_backend.dto;
 
 import lombok.Getter;
 import lombok.Setter;
