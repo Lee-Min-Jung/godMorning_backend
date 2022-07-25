@@ -1,13 +1,16 @@
 package com.godMorning_backend.repository;
 
+import com.godMorning_backend.domain.Heart;
 import com.godMorning_backend.domain.Routine;
 import com.godMorning_backend.domain.ToDo;
+import com.godMorning_backend.dto.HeartRank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.godMorning_backend.domain.user.User;
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -56,10 +59,14 @@ public class JDBCRoutineRepository implements RoutineRepository{
     public void updateRoutine(Routine routine) {
 
     }
-    //신규 루틴 조회
 
+
+    //신규 루틴 전체 조회
     @Override
     public List<Routine> newRoutineList() {
+
+
+        //
         String sql1 = "select * from Routine order by post_no desc";
         List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper());
         return result;
@@ -203,6 +210,7 @@ public class JDBCRoutineRepository implements RoutineRepository{
             routine.setCreate_date((rs.getString("create_date")));
             routine.setStartTime((rs.getString("startTime")));
             routine.setEndTime((rs.getString("endTime")));
+            routine.setHeartCount((rs.getInt("heartCount")));
             return routine;
         };
     }
@@ -219,7 +227,17 @@ public class JDBCRoutineRepository implements RoutineRepository{
             return user;
         };
     }
+    //Heart mapper
+    private RowMapper<Heart> HeartRowMapper() {
+        return (rs, rowNum) -> {
+            Heart heart = new Heart();
+            heart.setH_number((rs.getLong("h_number")));
+            heart.setPost_no((rs.getLong("post_no")));
+            heart.setId((rs.getLong("id")));
 
+            return heart;
+        };
+    }
     //toDo mapper
     private RowMapper<ToDo> ToDoRowMapper() {
         return (rs, rowNum) -> {

@@ -4,7 +4,9 @@ import com.godMorning_backend.domain.Heart;
 import com.godMorning_backend.domain.Routine;
 import com.godMorning_backend.domain.ToDo;
 import com.godMorning_backend.domain.user.User;
+import com.godMorning_backend.dto.HeartCount;
 import com.godMorning_backend.dto.HeartRank;
+import com.mysql.cj.result.Row;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -35,13 +37,28 @@ public class JDBCHeartRepository {
 
     public void insertHeart(Heart heart) {
 
+        //heart 테이블에 heart insert하고 h_number 설정
         String sql1 = "INSERT INTO Heart(h_number, id, post_no) VALUES (0,?,?)";
         String sql2 = "update Heart set h_number = h_number + 1 where post_no = ?";
+
+
         //String sql2= "update Heart set h_number = h_number + 1 where post_no = ?";
         Object[] Params1 = {heart.getId(), heart.getPost_no()};
         Object[] Params2 = {heart.getPost_no()};
+
+
         jdbcTemplate.update(sql1, Params1);
         jdbcTemplate.update(sql2, Params2);
+
+
+        //Heart에서 최대 h_number찾아서 Routine 테이블 heartCount에 넣어주기
+       //최대 h_number은 리스트 중 맨 처음 결과라는 것을 활용
+        String sql3 = "select * from Heart where post_no = ? ";
+        List<Heart> heartList = jdbcTemplate.query(sql3, HeartRowMapper(), heart.getPost_no());
+
+        Object[] Params3 = {heart.getPost_no()};
+        String sql4 = "update Routine set heartCount = heartCount + 1 where post_no = ?";
+        jdbcTemplate.update(sql4, Params3);
         /*
         if ( heart.getH_number() > 0) {
             jdbcTemplate.update(sql2, Params1);
@@ -107,6 +124,14 @@ public class JDBCHeartRepository {
         newRoutineDetail.setNickname(nameResult);
 
         return newRoutineDetail;
+    }
+    //hearCount mapper
+    private RowMapper<HeartCount> heartCountRowMapper(){
+        return (rs, rowNum) -> {
+            HeartCount heartCount = new HeartCount();
+            heartCount.setHeartCount((rs.getInt("heartCount")));
+            return heartCount;
+        };
     }
     //routine mapper
     private RowMapper<Routine> RoutineRowMapper() {
