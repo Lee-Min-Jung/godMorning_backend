@@ -2,6 +2,8 @@ package com.godMorning_backend.repository;
 
 import com.godMorning_backend.domain.Heart;
 import com.godMorning_backend.domain.Routine;
+import com.godMorning_backend.domain.ToDo;
+import com.godMorning_backend.domain.user.User;
 import com.godMorning_backend.dto.HeartRank;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -78,7 +80,34 @@ public class JDBCHeartRepository {
         return result;
 
     }
+    //heart rank 상세보기
+    public Routine heartRankDetail(Long post_no){
+        //id 뽑기
+        String sql0 = "select * from Routine where post_no = ?";
+        List<Routine> result0 = jdbcTemplate.query(sql0, RoutineRowMapper(), post_no);
+        Long idResult = result0.get(0).getId();
 
+
+        //뽑은 id로 name 뽑기
+        String sql01 = "select * from user where id = ?";
+        List<User> result01 = jdbcTemplate.query(sql01, UserRowMapper(), idResult );
+        String nameResult = result01.get(0).getNickname();
+
+        //post_no에 맞는 루틴 뽑기
+        String sql1 = "select * from Routine where post_no = ?";
+        List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper(), post_no);
+        Routine newRoutineDetail = result.get(0);
+
+        //post_no에 맞는 투두뽑기
+        String sql2 = "select * from ToDo where post_no = ?";
+        List<ToDo> result2 = jdbcTemplate.query(sql2, ToDoRowMapper(), post_no);
+
+        //routine에 todo랑 name 설정
+        newRoutineDetail.setTodo_list(result2);
+        newRoutineDetail.setNickname(nameResult);
+
+        return newRoutineDetail;
+    }
     //routine mapper
     private RowMapper<Routine> RoutineRowMapper() {
         return (rs, rowNum) -> {
@@ -90,6 +119,28 @@ public class JDBCHeartRepository {
             routine.setStartTime((rs.getString("startTime")));
             routine.setEndTime((rs.getString("endTime")));
             return routine;
+        };
+    }
+    //toDo mapper
+    private RowMapper<ToDo> ToDoRowMapper() {
+        return (rs, rowNum) -> {
+            ToDo todo = new ToDo();
+            todo.setPost_no((rs.getLong("post_no")));
+            todo.setContent((rs.getString("content")));
+
+            return todo;
+        };
+    }
+    //user mapper
+    private RowMapper<User> UserRowMapper() {
+        return (rs, rowNum) -> {
+            User user = new User();
+            user.setId((rs.getLong("id")));
+            user.setUsername((rs.getString("username")));
+            user.setNickname((rs.getString("nickname")));
+
+
+            return user;
         };
     }
     private RowMapper<HeartRank> HeartRankRowMapper() {

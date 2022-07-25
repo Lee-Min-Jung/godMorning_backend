@@ -55,11 +55,16 @@ public class HeartController {
 
     }
 
+    //좋아요 순위 게시판
     @RequestMapping(value = "heart/rank")
     public List<Routine> heartRank() {
         return heartServiceImpl.heartRank();
     }
 
-
+    //좋아요 순위 게시판 상세보기
+    @RequestMapping(value = "heart/rank/{post_no}")
+    public Routine heartRankDetail(@PathVariable("post_no")Long post_no){
+        return heartServiceImpl.heartRankDetail(post_no);
+    }
 
 }

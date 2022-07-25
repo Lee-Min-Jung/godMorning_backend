@@ -45,4 +45,8 @@ public class HeartServiceImpl {
 
         return jdbcHeartRepository.heartRank();
     }
+
+    public Routine heartRankDetail(Long post_no){
+        return jdbcHeartRepository.heartRankDetail(post_no);
+    }
 }
