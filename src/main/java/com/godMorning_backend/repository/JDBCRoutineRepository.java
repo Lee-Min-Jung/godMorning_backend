@@ -214,6 +214,7 @@ public class JDBCRoutineRepository implements RoutineRepository {
             routine.setStartTime((rs.getString("startTime")));
             routine.setEndTime((rs.getString("endTime")));
             routine.setHeartCount((rs.getInt("heartCount")));
+            routine.setScrapCount((rs.getInt("scrapCount")));
             return routine;
         };
     }

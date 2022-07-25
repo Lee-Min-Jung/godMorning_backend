@@ -129,6 +129,7 @@ public class JDBCHeartRepository {
             routine.setEndTime((rs.getString("endTime")));
             routine.setHeartCount((rs.getInt("heartCount")));
             routine.setScrapCount((rs.getInt("scrapCount")));
+            routine.setScrapCount((rs.getInt("scrapCount")));
             return routine;
         };
     }
