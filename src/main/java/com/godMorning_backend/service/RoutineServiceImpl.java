@@ -33,14 +33,14 @@ public class RoutineServiceImpl implements RoutineService{
 
     //신규 루틴 상세 조회
 
-
     @Override
     public Routine newRoutineDetail(Long post_no) {
         return jdbcRoutineRepository.newRoutineDetail(post_no);
     }
 
-    //시간대 루틴 조회
 
+
+    //시간대 루틴 조회
     @Override
     public List<Routine> startTimeList(int startTime) {
         return jdbcRoutineRepository.startTimeList(startTime);
@@ -53,6 +53,9 @@ public class RoutineServiceImpl implements RoutineService{
     public Routine startTimeDetail(int startTime, Long post_no) {
         return jdbcRoutineRepository.startTimeDetail(startTime, post_no);
     }
+
+
+    
 
     //나의 루틴 전체보기
 
@@ -82,4 +85,6 @@ public class RoutineServiceImpl implements RoutineService{
     public String deleteRoutine(int post_no) {
         return jdbcRoutineRepository.deleteRoutine(post_no);
     }
+
+
 }

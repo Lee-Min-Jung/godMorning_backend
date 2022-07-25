@@ -24,16 +24,22 @@ public interface RoutineRepository {
     //신규 루틴 상세 조회
     Routine newRoutineDetail(Long post_no);
 
+    //나의 루틴 전체 조회
+    List<Routine> myRoutine(Long id);
+
+    //나의 루틴 상세 보기
+    Routine myRoutineDetail(Long id, Long post_no);
+
     //시간대별 루틴 조회
     List<Routine> startTimeList(int startTime);
 
     //시간대별 루틴 상세조회
     Routine startTimeDetail(int startTime, Long post_no);
 
-    //나의 루틴 전체 조회
-    List<Routine> myRoutine(Long id);
 
-    //나의 루틴 상세 보기
-    Routine myRoutineDetail(Long id, Long post_no);
+
+
+
+
 
 }

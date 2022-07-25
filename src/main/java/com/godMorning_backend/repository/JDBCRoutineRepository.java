@@ -14,13 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class JDBCRoutineRepository implements RoutineRepository{
+public class JDBCRoutineRepository implements RoutineRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
     public JDBCRoutineRepository(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
-
     }
 
     //id랑 날짜로 루틴 찾기
@@ -49,8 +48,6 @@ public class JDBCRoutineRepository implements RoutineRepository{
             Object[] Params2 = {routine.getTodo_list().get(i).getPost_no(), routine.getTodo_list().get(i).getContent() };
             jdbcTemplate.update(sql2, Params2);
         }
-
-
 
     }
 
@@ -103,6 +100,8 @@ public class JDBCRoutineRepository implements RoutineRepository{
         return newRoutineDetail;
     }
 
+
+
     //시간대별 루틴
     @Override
     public List<Routine> startTimeList(int startTime) {
@@ -152,6 +151,8 @@ public class JDBCRoutineRepository implements RoutineRepository{
         return timezoneDetail;
     }
 
+
+
     //나의 루틴 전체 보기
 
     @Override
@@ -178,6 +179,8 @@ public class JDBCRoutineRepository implements RoutineRepository{
         return routineResult.get(0);
 
     }
+
+
 
     //루틴 삭제
     @Override
@@ -248,6 +251,8 @@ public class JDBCRoutineRepository implements RoutineRepository{
             return todo;
         };
     }
+
+
 
 
 }

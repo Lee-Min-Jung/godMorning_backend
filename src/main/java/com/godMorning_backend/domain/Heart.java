@@ -10,10 +10,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Heart {
 
-    private long h_number;
+
     // 게시글 번호
     private long post_no;
     // 회원 번호
     private long id;
 
+    private long h_number;
 }

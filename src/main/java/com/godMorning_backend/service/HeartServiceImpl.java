@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Service
-public class HeartServiceImpl {
+public class HeartServiceImpl implements HeartService {
 
     private final JDBCHeartRepository jdbcHeartRepository;
 
@@ -41,9 +41,10 @@ public class HeartServiceImpl {
         jdbcHeartRepository.heartIncrement(heart);
     }
 */
+
     public List<Routine> heartRank() {
 
-        return jdbcHeartRepository.heartRank();
+    return jdbcHeartRepository.heartRank();
     }
 
     public Routine heartRankDetail(Long post_no){

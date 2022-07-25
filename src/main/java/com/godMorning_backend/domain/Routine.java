@@ -19,6 +19,7 @@ public class Routine {
     private String startTime;
     private String endTime;
     private int heartCount;
+    private int scrapCount;
     List<ToDo> todo_list;
 
 

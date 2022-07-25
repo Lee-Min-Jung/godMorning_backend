@@ -25,6 +25,10 @@ public class JDBCScrapRepository implements ScrapRepository{
         String sql = "INSERT INTO Scrap(id, post_no) VALUES (?,?)";
         Object[] Params = {scrap.getId(), scrap.getPost_no()};
         jdbcTemplate.update(sql, Params);
+
+        Object[] Params1 = {scrap.getPost_no()};
+        String sql4 = "update Routine set scrapCount = scrapCount + 1 where post_no = ?";
+        jdbcTemplate.update(sql4, Params1);
     }
 
     //id별 스크랩 전체 조회
@@ -105,6 +109,9 @@ public class JDBCScrapRepository implements ScrapRepository{
             routine.setCreate_date(rs.getString("create_date"));
             routine.setStartTime((rs.getString("startTime")));
             routine.setEndTime((rs.getString("endTime")));
+            routine.setHeartCount((rs.getInt("heartCount")));
+            routine.setScrapCount((rs.getInt("scrapCount")));
+
 
             return routine;
         };

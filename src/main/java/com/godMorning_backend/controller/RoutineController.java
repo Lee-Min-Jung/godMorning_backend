@@ -80,11 +80,9 @@ public class RoutineController {
 
     //신규 루틴 상세 조회
     @RequestMapping(value="newRoutine/list/{post_no}")
-    public Routine newRoutineDetail(@PathVariable("post_no") Long post_no, HttpServletRequest request, Model model){
-
+    public Routine newRoutineDetail(@PathVariable("post_no") Long post_no, HttpServletRequest request, Model model) {
         return routineServiceImpl.newRoutineDetail(post_no);
     }
-
     //시간대 루틴 조회
     @RequestMapping(value="timezone/list/{startTime}")
     public List<Routine> timezoneList(@PathVariable("startTime") int startTime){
@@ -96,6 +94,7 @@ public class RoutineController {
     public Routine timezoneDetail(@PathVariable("startTime") int startTime, @PathVariable("post_no") Long post_no){
         return routineServiceImpl.startTimeDetail(startTime, post_no);
     }
+
 
     //나의 루틴 전체 보기
     @RequestMapping(value="myRoutine/{id}")

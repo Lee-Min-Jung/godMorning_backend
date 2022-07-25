@@ -59,33 +59,18 @@ public class JDBCHeartRepository {
         Object[] Params3 = {heart.getPost_no()};
         String sql4 = "update Routine set heartCount = heartCount + 1 where post_no = ?";
         jdbcTemplate.update(sql4, Params3);
-        /*
-        if ( heart.getH_number() > 0) {
-            jdbcTemplate.update(sql2, Params1);
-        }
-        else {
-            jdbcTemplate.update(sql1, Params1);
-        }
-        */
-    }
-    //시간대별 루틴
-//    @Override
-//    public List<Routine> startTimeList(int startTime) {
-//        String sql1 = "select * from Routine where startTime = ?";
-//        List<Routine> result = jdbcTemplate.query(sql1, RoutineRowMapper(), startTime);
-//        return result;
-//    }
-    public List<Routine> heartRank() {
 
+    }
+
+
+    public List<Routine> heartRank() {
         String sql1 = "select post_no, count(post_no) from Heart group by post_no order by count(post_no) desc;";
         List<HeartRank> HeartResult = jdbcTemplate.query(sql1, HeartRankRowMapper());
-
         //위에 있는 sql을 통해 뽑은 post_no을 순서대로 리스트에 담기
         List<Long> postRank = new ArrayList<Long>();
         for(int i = 0; i< HeartResult.size(); i++){
             postRank.add(HeartResult.get(i).getPost_no());
         }
-
         //위에서 뽑은 post_no을 하나씩 sql2에 넘겨서 결과 뽑아내기
         List<Routine> result = new ArrayList<Routine>();
         String sql2 = "select * from Routine where post_no = ?";
@@ -93,7 +78,6 @@ public class JDBCHeartRepository {
             List<Routine> result2 = jdbcTemplate.query(sql2, RoutineRowMapper(), postRank.get(i));
             result.add(result2.get(0));
         }
-
         return result;
 
     }
@@ -144,6 +128,7 @@ public class JDBCHeartRepository {
             routine.setStartTime((rs.getString("startTime")));
             routine.setEndTime((rs.getString("endTime")));
             routine.setHeartCount((rs.getInt("heartCount")));
+            routine.setScrapCount((rs.getInt("scrapCount")));
             return routine;
         };
     }
@@ -193,20 +178,6 @@ public class JDBCHeartRepository {
         return result.stream().findAny();
     }
 }
-    /*
-    public void heartIncrement(Heart heart) {
-        String sql= "update Heart set h_number = h_number + 1 where post_no = ? and id=?";
-        Object[] Params = {heart.getH_number(), heart.getPost_no(), heart.getId()};
-        jdbcTemplate.update(sql,Params);
 
-    }
-
-        String sql1 = "select distinct post_no, rank() over (order by h_number) as ranking from Heart";
-        //String sql2 = "select MAX(h_number) where post_no=? from Heart";
-        List<Heart> rank = jdbcTemplate.query(sql1, HeartRowMapper(), post_no);
-        //List<Heart> max = jdbcTemplate.query(sql2, HeartRowMapper(), post_no);
-
-        return rank;
-    */
 
 

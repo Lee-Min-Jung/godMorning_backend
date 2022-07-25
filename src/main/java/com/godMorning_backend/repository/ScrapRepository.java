@@ -20,4 +20,9 @@ public interface ScrapRepository {
 
     //스크랩 삭제
     String deleteScrap(Long id, Long post_no);
+
+
+    // 스크랩 수 카운트
+    //List<Scrap> scrapCount();
+
 }
