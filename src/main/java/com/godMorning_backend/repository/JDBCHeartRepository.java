@@ -143,6 +143,7 @@ public class JDBCHeartRepository {
             routine.setCreate_date((rs.getString("create_date")));
             routine.setStartTime((rs.getString("startTime")));
             routine.setEndTime((rs.getString("endTime")));
+            routine.setHeartCount((rs.getInt("heartCount")));
             return routine;
         };
     }
