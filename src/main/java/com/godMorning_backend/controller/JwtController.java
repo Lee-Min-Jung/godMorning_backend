@@ -6,7 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.godMorning_backend.jwt.JwtProperties;
 import com.godMorning_backend.config.oauth.provider.GoogleUser;
 import com.godMorning_backend.config.oauth.provider.OAuthUserInfo;
-import com.godMorning_backend.domain.user.User;
+import com.godMorning_backend.domain.User;
 import com.godMorning_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Date;
 

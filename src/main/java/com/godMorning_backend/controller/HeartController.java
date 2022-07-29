@@ -29,6 +29,8 @@ public class HeartController {
     }
 
     @ResponseBody
+
+    //좋아요 진행
     @PostMapping(value = "heart/insert", produces = "application/json; charset=UTF-8")
     public Heart insert(@RequestBody Heart ht) {
         Long id = 0L;
@@ -45,6 +47,7 @@ public class HeartController {
         return ht;
     }
 
+    //좋아요 삭제
     @RequestMapping(value = "heart/delete")
     public String deleteHeart(HttpServletRequest request, Model model) {
         Long id = Long.parseLong(request.getParameter("id"));

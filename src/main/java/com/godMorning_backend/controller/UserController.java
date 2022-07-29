@@ -1,21 +1,14 @@
 package com.godMorning_backend.controller;
+import com.godMorning_backend.dto.JoinResult;
 import com.godMorning_backend.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.core.Authentication;
-import com.godMorning_backend.config.auth.PrincipalDetails;
 import com.godMorning_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import com.godMorning_backend.domain.user.User;
+import com.godMorning_backend.domain.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,14 +20,19 @@ public class UserController {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserService userService;
 
+
+
+
     @PostMapping("join") //회원가입하는 컨트롤러
-    public String join(@RequestBody User user) {
+    public JoinResult join(@RequestBody User user) {
         user.setUsername(user.getUsername());
         user.setNickname(user.getNickname());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles("ROLE_USER");
         userRepository.save(user);
-        return "회원가입완료";
+        JoinResult joinResult = new JoinResult();
+        joinResult.setNickname(user.getNickname());
+        return joinResult;
     }
 
     @RequestMapping(value="duplicationCheck") //아이디 중복조회 컨트롤러

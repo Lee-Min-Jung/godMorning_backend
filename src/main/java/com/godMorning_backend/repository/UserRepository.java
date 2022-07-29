@@ -1,6 +1,6 @@
 package com.godMorning_backend.repository;
 
-import com.godMorning_backend.domain.user.User;
+import com.godMorning_backend.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 //JpaRepository가 CRUD함수를 이미 가지고 있다

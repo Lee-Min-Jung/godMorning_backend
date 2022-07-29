@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Wise {
-    private Long wise_no;
-    private String wise_saying;
+    private Long wise_no; //명언 번호
+    private String wise_saying;//명언 내용
 }

@@ -3,14 +3,12 @@ package com.godMorning_backend.repository;
 import com.godMorning_backend.domain.Heart;
 import com.godMorning_backend.domain.Routine;
 import com.godMorning_backend.domain.ToDo;
-import com.godMorning_backend.dto.HeartRank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import com.godMorning_backend.domain.user.User;
+import com.godMorning_backend.domain.User;
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository

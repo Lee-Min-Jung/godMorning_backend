@@ -1,10 +1,8 @@
 package com.godMorning_backend.config.auth;
 
-import com.godMorning_backend.domain.user.User;
+import com.godMorning_backend.domain.User;
 import com.godMorning_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

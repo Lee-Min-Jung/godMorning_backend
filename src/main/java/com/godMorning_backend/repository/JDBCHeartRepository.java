@@ -3,10 +3,9 @@ package com.godMorning_backend.repository;
 import com.godMorning_backend.domain.Heart;
 import com.godMorning_backend.domain.Routine;
 import com.godMorning_backend.domain.ToDo;
-import com.godMorning_backend.domain.user.User;
+import com.godMorning_backend.domain.User;
 import com.godMorning_backend.dto.HeartCount;
 import com.godMorning_backend.dto.HeartRank;
-import com.mysql.cj.result.Row;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -26,6 +25,7 @@ public class JDBCHeartRepository {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    //좋아요 삭제
     public String deleteHeart(Long id, Long post_no) {
         String sql1 = "delete from Heart where id = ? and post_no = ?";
         String sql2 = "update Heart set h_number = h_number - 1 where post_no = ?";
@@ -35,6 +35,7 @@ public class JDBCHeartRepository {
         return "좋아요 취소";
     }
 
+    //좋아요 진행
     public void insertHeart(Heart heart) {
 
         //heart 테이블에 heart insert하고 h_number 설정
@@ -42,7 +43,6 @@ public class JDBCHeartRepository {
         String sql2 = "update Heart set h_number = h_number + 1 where post_no = ?";
 
 
-        //String sql2= "update Heart set h_number = h_number + 1 where post_no = ?";
         Object[] Params1 = {heart.getId(), heart.getPost_no()};
         Object[] Params2 = {heart.getPost_no()};
 
@@ -63,6 +63,7 @@ public class JDBCHeartRepository {
     }
 
 
+    //좋아요 게시판 전체보기
     public List<Routine> heartRank() {
         String sql1 = "select post_no, count(post_no) from Heart group by post_no order by count(post_no) desc;";
         List<HeartRank> HeartResult = jdbcTemplate.query(sql1, HeartRankRowMapper());
@@ -133,7 +134,7 @@ public class JDBCHeartRepository {
             return routine;
         };
     }
-    //toDo mapper
+    //투두 mapper
     private RowMapper<ToDo> ToDoRowMapper() {
         return (rs, rowNum) -> {
             ToDo todo = new ToDo();

@@ -9,8 +9,8 @@ import java.util.List;
 @Setter
 public class ToDo {
 
-    private Long post_no;
-    private String content;
+    private Long post_no;//투두가 속한 게시글 번호
+    private String content;//투두 내용
 
 
 

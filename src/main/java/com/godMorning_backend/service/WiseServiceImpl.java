@@ -13,6 +13,7 @@ public class WiseServiceImpl implements WiseService{
         this.jdbcWiseRepository = jdbcWiseRepository;
     }
 
+    //랜덤 명언 조회
     @Override
     public String findByNo() {
         Random random = new Random();

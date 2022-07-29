@@ -20,8 +20,10 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.godMorning_backend.config.auth.PrincipalDetails;
+import com.godMorning_backend.dto.JoinResult;
 import com.godMorning_backend.dto.LoginRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.mapping.Join;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -40,6 +42,7 @@ import java.util.Date;
 // 이 필터가 자동 실행되게 해주려면 필터를 다시 스프링 시큐리티 설정에 등록해야 한다.
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
+
 
 
     // /login 요청하면 로그인 시도를 위해 실행되는 함수, 로그인한 사람이 입력한 정보로 로그인 되는지 확인
@@ -96,7 +99,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     //attemptAuthentication 실행 후에 인증이 정상적으로 되었을 경우 successfulAuthentication 가 실행됨.
     // 이때 JWT Token 생성해서 response에 담아주기
    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-                                            Authentication authResult) throws IOException, ServletException {
+                                           Authentication authResult) throws IOException, ServletException {
         System.out.println("인증이 완료되었음");
         PrincipalDetails principalDetailis = (PrincipalDetails) authResult.getPrincipal();
 
@@ -115,12 +118,22 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 //                .withClaim("id", principalDetailis.getUser().getId())
 //                .withClaim("username", principalDetailis.getUser().getUsername())
 //                .sign(Algorithm.HMAC512(JwtProperties.SECRET));
-
+        //헤더에 id 담기 위한 변수 설정
+        String ID_STRING = "ID";
+        String ID_VALUE = String.valueOf(principalDetailis.getUser().getId());
+        String NICKNAME_STRING = "NICKNAME";
+        String NICKNAME_VALUE = principalDetailis.getNickname();
         //발행한 토큰 header에 넣어주기
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX+accessToken);
+        //아이디 헤더에 넣기
+        response.addHeader(ID_STRING, ID_VALUE);
+        //닉네임 헤더에 넣기
+        response.addHeader(NICKNAME_STRING, NICKNAME_VALUE);
 //        response.addHeader(JwtProperties.REFRESH_HEADER_STRING, JwtProperties.TOKEN_PREFIX+refreshToken);
 
+        //response.sendRedirect("loginDone");
 
+        System.out.println("+++++++++++++++++++++++++");
 
     }
 }

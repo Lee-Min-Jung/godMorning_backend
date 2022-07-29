@@ -13,6 +13,7 @@ public class ToDoServiceImpl implements ToDoService{
         this.jdbcToDoRepository = jdbcToDoRepository;
     }
 
+    //투두 저장
     @Override
     public int saveToDo(ToDo todo) {
         jdbcToDoRepository.saveToDo(todo);

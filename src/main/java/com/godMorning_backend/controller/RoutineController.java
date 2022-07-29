@@ -36,29 +36,6 @@ public class RoutineController {
     }
 
 
-//    @PostMapping(value = "todo/create", produces = "application/json; charset_UTF-8")
-//    public ToDo save(@RequestBody ToDo todo){
-//        SessionUser user = (SessionUser) httpSession.getAttribute("google_user");
-//        //투두
-//
-//        int post_no = 0;
-//        String content = "";
-//        int check_do = 0;
-//
-//
-//        post_no = todo.getPost_no();
-//        content = todo.getContent();
-//        check_do = todo.getCheck_do();
-//
-//
-//        todo.setPost_no(post_no);
-//        todo.setContent(content);
-//        todo.setCheck_do(0);
-//
-//        toDoServiceImpl.saveToDo(todo);
-//
-//        return todo;
-//    }
 
     //아이디와 날짜로 루틴 조회
     @RequestMapping(value = "todo/list")

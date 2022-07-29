@@ -3,7 +3,7 @@ package com.godMorning_backend.config.auth;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import com.godMorning_backend.domain.user.User;
+import com.godMorning_backend.domain.User;
 import java.util.ArrayList;
 import java.util.Collection;
 //왜 만든 파일인지 이해가 안 감, 4강 내용
@@ -29,6 +29,10 @@ public class PrincipalDetails implements UserDetails {
         return user.getUsername();
     }
 
+
+    public String getNickname(){
+        return user.getNickname();
+    }
     @Override
     public boolean isAccountNonExpired() {
         return true;

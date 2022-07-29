@@ -3,7 +3,7 @@ package com.godMorning_backend.repository;
 import com.godMorning_backend.domain.Routine;
 import com.godMorning_backend.domain.Scrap;
 import com.godMorning_backend.domain.ToDo;
-import com.godMorning_backend.domain.user.User;
+import com.godMorning_backend.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;

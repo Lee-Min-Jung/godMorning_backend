@@ -28,6 +28,8 @@ public class ScrapController {
     }
 
     @ResponseBody
+
+    //스크랩 진행
     @PostMapping(value = "scrap/create", produces = "application/json; charset=UTF-8")
     public Scrap save(@RequestBody Scrap scr) {
 
@@ -48,20 +50,9 @@ public class ScrapController {
     public Routine timezoneDetail(@PathVariable("id") long id, @PathVariable("post_no") long post_no){
         return scrapServiceImpl.findByIdAndPostNo(id, post_no);
     }
-    //아이디별 스크랩 전체 보기
-//    @RequestMapping(value = "scrap/list", produces = "application/json; charset=UTF-8")
-//    public List<Routine> findById(HttpServletRequest request){
-//        Long id =  Long.parseLong(request.getParameter("id"));
-//        return scrapServiceImpl.findById(id);
-//    }
 
-    //아이디별 스크랩 상세 보기
-//    @RequestMapping(value = "scrap/list", produces = "application/json; charset=UTF-8")
-//    public List<Routine> findById(HttpServletRequest request){
-//        Long id =  Long.parseLong(request.getParameter("id"));
-//        return scrapServiceImpl.findById(id);
-//    }
 
+    //스크랩 삭제
     @RequestMapping(value = "scrap/delete")
     public String deleteScrap(HttpServletRequest request, Model model){
         Long id =  Long.parseLong(request.getParameter("id"));

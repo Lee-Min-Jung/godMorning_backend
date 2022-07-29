@@ -12,6 +12,7 @@ public class WiseController {
         this.wiseServiceImpl = wiseServiceImpl;
     }
 
+    //명언 조회
     @RequestMapping(value="wiseSaying")
     public String randomWiseSaying(){
         return wiseServiceImpl.findByNo();

@@ -1,11 +1,9 @@
 package com.godMorning_backend.service;
 
-import com.godMorning_backend.domain.user.User;
+import com.godMorning_backend.domain.User;
 import com.godMorning_backend.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService {

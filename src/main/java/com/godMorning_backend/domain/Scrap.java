@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Scrap {
 
-    private long post_no;
-    private long id;
+    private long post_no;//스크랩한 게시글 번호
+    private long id;//스크랩한 회원 아이디
 
 
 }
